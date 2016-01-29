@@ -1,0 +1,102 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scene_container"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:gravity="center">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:text="Get started !"
+        android:textSize="24sp"
+        android:textColor="@color/bac"/>
+
+    <EditText
+        android:id="@+id/login_username_input"
+        android:layout_below="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="12dp"
+        android:drawableLeft="@drawable/ic_account_circle_black_24dp"
+        android:drawablePadding="8dp"
+        android:background="@drawable/custom_edit_text"
+        android:fontFamily="sans-serif"
+        android:hint="@string/com_parse_ui_username_input_hint" />
+
+    <EditText
+        android:id="@+id/login_password_input"
+        android:layout_below="@+id/login_username_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:padding="12dp"
+        android:drawableLeft="@drawable/ic_lock_outline_black_24dp"
+        android:drawablePadding="8dp"
+        android:background="@drawable/custom_edit_text"
+        android:hint="@string/com_parse_ui_password_input_hint"
+        android:inputType="textPassword"
+        android:fontFamily="sans-serif" />
+
+    <EditText
+        android:id="@+id/signup_confirm_password_input"
+        android:layout_below="@+id/login_password_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:padding="12dp"
+        android:drawableLeft="@drawable/ic_lock_outline_black_24dp"
+        android:drawablePadding="8dp"
+        android:background="@drawable/custom_edit_text"
+        android:hint="@string/com_parse_ui_confirm_password_input_hint"
+        android:inputType="textPassword"
+        android:fontFamily="sans-serif" />
+    <!-- style="@style/ParseLoginUI.EditText" -->
+
+    <EditText
+        android:id="@+id/signup_email_input"
+        android:layout_below="@+id/signup_confirm_password_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:padding="12dp"
+        android:drawableLeft="@drawable/ic_mail_black_24dp"
+        android:drawablePadding="8dp"
+        android:background="@drawable/custom_edit_text"
+        android:hint="@string/com_parse_ui_email_input_hint"
+        android:inputType="textEmailAddress"
+        android:fontFamily="sans-serif"/>
+
+    <EditText
+        android:id="@+id/signup_name_input"
+        android:layout_below="@+id/signup_email_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:padding="12dp"
+        android:drawableLeft="@drawable/ic_mood_black_24dp"
+        android:drawablePadding="8dp"
+        android:background="@drawable/custom_edit_text"
+        android:hint="@string/com_parse_ui_name_input_hint"
+        android:inputType="textPersonName" />
+
+    <Button
+        android:id="@+id/create_account"
+        android:layout_below="@+id/signup_name_input"
+        style="@style/ParseLoginUI.Button"
+        android:layout_marginTop="15dp"
+        android:text="@string/com_parse_ui_create_account_button_label" />
+
+
+    <!-- <TextView
+        android:id="@+id/text_view1
+        android:text="Text Line 1" />
+    <TextView
+        android:id="@+id/text_view2
+        android:text="Text Line 2" /> -->
+</RelativeLayout>
+<!-- From: file:/D:/Projetcs/BelleVue/BelleVue/src/main/res/layout/signup_content_form.xml -->

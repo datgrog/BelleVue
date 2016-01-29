@@ -1,0 +1,62 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scene_container"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:orientation="vertical"
+    android:animateLayoutChanges="true"
+    android:gravity="center">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:text="Get started !"
+        android:textSize="24sp"
+        android:textColor="@color/bac"/>
+
+    <EditText
+        android:id="@+id/login_username_input"
+        android:layout_below="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="12dp"
+        android:drawableLeft="@drawable/ic_account_circle_black_24dp"
+        android:drawablePadding="8dp"
+        android:background="@drawable/custom_edit_text"
+        android:fontFamily="sans-serif"
+        android:hint="@string/com_parse_ui_username_input_hint" />
+
+    <EditText
+        android:id="@+id/login_password_input"
+        android:layout_below="@+id/login_username_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:padding="12dp"
+        android:drawableLeft="@drawable/ic_lock_outline_black_24dp"
+        android:drawablePadding="8dp"
+        android:background="@drawable/custom_edit_text"
+        android:hint="@string/com_parse_ui_password_input_hint"
+        android:inputType="textPassword"
+        android:fontFamily="sans-serif" />
+
+    <Button
+        android:id="@+id/parse_login_help"
+        android:layout_below="@+id/login_password_input"
+        android:layout_centerHorizontal="true"
+        style="@style/ParseLoginUI.HelpButton"
+        android:text="@string/com_parse_ui_forgot_password_button_label" />
+
+    <!-- <TextView
+        android:id="@+id/text_view1
+        android:text="Text Line 1" />
+    <TextView
+        android:id="@+id/text_view2
+        android:text="Text Line 2" /> -->
+</RelativeLayout>
+<!-- From: file:/D:/Projetcs/BelleVue/BelleVue/src/main/res/layout/login_content_form.xml -->

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:orientation="horizontal"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:gravity="center_horizontal">
+
+    <TextView
+        android:id="@+id/Tv_sigdsdsn"
+        android:text="Or log in with "
+        android:textColor="@color/txt"
+        android:textSize="15sp"
+        android:layout_marginTop="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_facebook_100"
+        android:id="@+id/facebook" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_google_plus_100"
+        android:id="@+id/google" />
+
+</LinearLayout><!-- From: file:/D:/Projetcs/BelleVue/BelleVue/src/main/res/layout/login_third_party_section.xml -->

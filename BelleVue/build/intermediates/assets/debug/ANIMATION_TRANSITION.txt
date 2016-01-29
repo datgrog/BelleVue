@@ -1,0 +1,38 @@
+/**
+* Take care of popping the fragment back stack or finishing the activity
+* as appropriate.
+*/
+private Scene mAScene;
+private Scene mAnotherScene;
+private Transition mFadeTransition;
+private ViewGroup mSceneRoot;
+
+// SA CLIGNOTTE WOUAW
+        AlphaAnimation anim = new AlphaAnimation(1.0f, 0.0f);
+        anim.setDuration(1000);
+        anim.setRepeatCount(BIND_ABOVE_CLIENT);
+        anim.setRepeatMode(Animation.REVERSE);
+        parseLoginButton.startAnimation(anim);
+
+// Create the scene root for the scenes in this app
+        mSceneRoot = (ViewGroup) findViewById(R.id.sign_in_root);
+
+        // Create the scenes
+        mAScene = Scene.getSceneForLayout(mSceneRoot, R.layout.login_content_form, this);
+        mAnotherScene =
+        Scene.getSceneForLayout(mSceneRoot, R.layout.signup_content_form, this);
+
+        mFadeTransition =
+            TransitionInflater.from(this).
+            inflateTransition(R.transition.fade_transition);
+
+        TransitionManager.go(mAnotherScene, mFadeTransition);
+
+@Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        mFadeTransition =
+        TransitionInflater.from(this).
+        inflateTransition(R.transition.fade_transition);
+        TransitionManager.go(mAScene, mFadeTransition);
+}
