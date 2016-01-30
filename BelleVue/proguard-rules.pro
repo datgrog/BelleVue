@@ -18,7 +18,7 @@
 
 # Keep source file names, line numbers, and Parse class/method names for easier debugging
 -keepattributes SourceFile,LineNumberTable
--keepnames class com.parse.** { *; }
+-keepnames class com.bellevue.** { *; }
 
 # Required for Parse
 -keepattributes *Annotation*

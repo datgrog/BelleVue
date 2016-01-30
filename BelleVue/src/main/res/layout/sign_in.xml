@@ -17,7 +17,7 @@
         android:layout_marginBottom="15dp"
         android:text="BelleVue"
         android:textSize="82sp"
-        android:textColor="@color/blu_logo"/>
+        android:textColor="@color/pri_dark"/>
 
     <FrameLayout
         android:layout_width="match_parent"

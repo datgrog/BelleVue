@@ -1,0 +1,18 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".MainAct">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/border"
+            android:title="Test 1"/>
+        <item
+            android:id="@+id/rottie"
+            android:checked="true"
+            android:title="Test 2"/>
+        <item
+            android:id="@+id/dachs"
+            android:title="Test 3"/>
+    </group>
+</menu>
+<!-- From: file:/home/guidis/Projects/BelleVue/BelleVue/src/main/res/menu/menu_main_test.xml -->

@@ -4,4 +4,4 @@
     android:layout_marginBottom="40dp"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:src="@drawable/app_logo" /><!-- From: file:/D:/Projetcs/BelleVue/BelleVue/src/main/res/layout/login_app_logo.xml -->
+    android:src="@drawable/app_logo" /><!-- From: file:/home/guidis/Projects/BelleVue/BelleVue/src/main/res/layout/login_app_logo.xml -->

@@ -17,7 +17,7 @@
         android:layout_marginBottom="15dp"
         android:text="BelleVue"
         android:textSize="82sp"
-        android:textColor="@color/blu_logo"/>
+        android:textColor="@color/pri_dark"/>
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -59,4 +59,4 @@
 
     </LinearLayout>
 
-</LinearLayout><!-- From: file:/D:/Projetcs/BelleVue/BelleVue/src/main/res/layout/sign_in.xml -->
+</LinearLayout><!-- From: file:/home/guidis/Projects/BelleVue/BelleVue/src/main/res/layout/sign_in.xml -->

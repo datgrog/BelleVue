@@ -3,4 +3,4 @@
     <fade android:fadingMode="fade_out" />
     <changeBounds />
     <fade android:fadingMode="fade_in" />
-</transitionSet><!-- From: file:/D:/Projetcs/BelleVue/BelleVue/src/main/res/transition/fade_transition.xml -->
+</transitionSet><!-- From: file:/home/guidis/Projects/BelleVue/BelleVue/src/main/res/transition/fade_transition.xml -->
