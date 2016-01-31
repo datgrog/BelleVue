@@ -1,4 +1,4 @@
 <bitmap
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:src="@drawable/embroidery"
-    android:tileMode="repeat" /><!-- From: file:/home/guidis/Projects/BelleVue/BelleVue/src/main/res/drawable/backrepeat.xml -->
+    android:tileMode="repeat" /><!-- From: file:/C:/Users/asusss/Desktop/BelleVue/BelleVue/src/main/res/drawable/backrepeat.xml -->

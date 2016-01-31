@@ -4,20 +4,19 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/backrepeat"
+    android:background="@drawable/backbelle"
     android:gravity="center_horizontal" >
 
     <!-- <include layout="@layout/login_app_logo" /> -->
-    <TextView
+   <TextView
         android:id="@+id/app_logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:layout_marginTop="15dp"
         android:layout_marginBottom="15dp"
-        android:text="BelleVue"
-        android:textSize="82sp"
-        android:textColor="@color/pri_dark"/>
+        android:text=""
+        android:textSize="140sp"/>
 
     <FrameLayout
         android:layout_width="match_parent"

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/viewX"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:background="@android:color/holo_blue_bright"
+            android:orientation="horizontal"
+
+            >
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/abc_ic_ab_back_mtrl_am_alpha"
+                android:id="@+id/backButton"
+                android:backgroundTint="#ff00ddff"/>
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="280dp"
+                android:src="@mipmap/ic_check"
+                android:id="@+id/OkButton"
+                android:backgroundTint="#ff00ddff"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/viewA"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.6"
+            android:background="@android:color/holo_blue_dark"
+            android:orientation="horizontal"
+            />
+
+        <LinearLayout
+            android:id="@+id/viewB"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.4"
+            android:background="@android:color/darker_gray"
+            android:orientation="vertical">
+
+            <RatingBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/ratingBar" />
+
+            <EditText
+                android:id="@+id/login_vueName_input"
+                android:layout_below="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="12dp"
+                android:drawableLeft="@mipmap/ic_vue"
+                android:drawablePadding="8dp"
+                android:background="@drawable/custom_edit_text"
+                android:fontFamily="sans-serif"
+                android:hint="Vue Name"
+                android:layout_marginTop="5dp" />
+
+            <EditText
+                android:id="@+id/login_vue_descrip"
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                android:padding="12dp"
+                android:drawableLeft="@mipmap/ic_vue"
+                android:drawablePadding="8dp"
+                android:background="@drawable/custom_edit_text"
+                android:fontFamily="sans-serif"
+                android:hint="Vue Description"
+                android:layout_marginTop="5dp" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:clickable="true"
+        android:src="@mipmap/ic_photo"
+        app:layout_anchor="@id/viewA"
+        app:backgroundTint="@color/pri_dark"
+        app:layout_anchorGravity="bottom|right|end"/>
+
+</android.support.design.widget.CoordinatorLayout><!-- From: file:/C:/Users/asusss/Desktop/BelleVue/BelleVue/src/main/res/layout/add_new_vue.xml -->

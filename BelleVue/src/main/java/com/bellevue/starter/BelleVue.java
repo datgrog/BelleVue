@@ -1,6 +1,8 @@
 package com.bellevue.starter;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -9,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -23,11 +26,15 @@ public class BelleVue extends AppCompatActivity {
     private ImageView iv, hiv;
     private NavigationView nav;
     private DrawerLayout dl;
+    private FloatingActionButton addButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.belle_vue);
+
+        addButton = (FloatingActionButton) findViewById(R.id.addBut);
+
 
         dl = (DrawerLayout) findViewById(R.id.drawer_layout);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -41,5 +48,17 @@ public class BelleVue extends AppCompatActivity {
 
         TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
         mTitle.setTypeface(com.bellevue.starter.CustomFontsLoader.getTypeface(this, com.bellevue.starter.CustomFontsLoader.Allura));
+
+        //for add button
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent vueTemp = new Intent(getApplicationContext(), VueTemplate.class);
+                startActivity(vueTemp);
+                finish();
+            }
+        });
+
+
     }
 }
