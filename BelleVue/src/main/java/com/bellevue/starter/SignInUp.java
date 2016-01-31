@@ -15,7 +15,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.parse.ParseAnalytics;
 
@@ -30,6 +32,12 @@ public class SignInUp extends AppCompatActivity {
     private Button parseSignupConfirmButton;
     private Button parseForgotButton;
 
+    private EditText login_username;                // login_username_input
+    private EditText login_password;                // login_password_input
+    private EditText signup_confirm_password;       // signup_confirm_password_input
+    private EditText signup_email;                  // signup_email_input
+    private EditText signup_name;                   // signup_email_input
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,7 +47,6 @@ public class SignInUp extends AppCompatActivity {
 
         parseLoginButton            = (Button) findViewById(R.id.parse_login_button);
         parseSignupButton           = (Button) findViewById(R.id.parse_signup_button);
-        parseSignupConfirmButton    = (Button) findViewById(R.id.create_account);
         parseForgotButton           = (Button) findViewById(R.id.parse_login_help);
 
         ParseAnalytics.trackAppOpenedInBackground(getIntent());
@@ -54,9 +61,13 @@ public class SignInUp extends AppCompatActivity {
         parseLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent bellevue = new Intent(getApplicationContext(), BelleVue.class);
+                /*Intent bellevue = new Intent(getApplicationContext(), BelleVue.class);
                 startActivity(bellevue);
-                finish();
+                finish();*/
+                login_username = (EditText) findViewById(R.id.login_username_input);
+                login_password = (EditText) findViewById(R.id.login_password_input);
+
+                Toast.makeText(getBaseContext(), "Sign IN with " + login_username.getText().toString() + " and " + login_password.getText().toString(), Toast.LENGTH_LONG).show();
             }
         });
 
@@ -74,6 +85,33 @@ public class SignInUp extends AppCompatActivity {
                 // Because mContainerView has android:animateLayoutChanges set to true,
                 // adding this view is automatically animated.
                 mContainerView.addView(newView, 0);
+
+                parseSignupConfirmButton    = (Button) findViewById(R.id.create_account);
+                parseSignupConfirmButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        login_username = (EditText) findViewById(R.id.login_username_input);
+                        login_username = (EditText) findViewById(R.id.login_password_input);
+
+                        signup_confirm_password = (EditText) findViewById(R.id.signup_confirm_password_input);
+                        signup_email = (EditText) findViewById(R.id.signup_email_input);
+                        signup_name = (EditText) findViewById(R.id.signup_name_input);
+
+                        Toast.makeText(getBaseContext(), "Sign IN with " + login_username.getText().toString()
+                                + " and " + login_password.getText().toString()
+                                + " and " + signup_confirm_password.getText().toString() + " and " + signup_email.getText().toString()
+                                + " and " + signup_name.getText().toString(), Toast.LENGTH_LONG).show();
+                    }
+                });
+
+            }
+        });
+
+        parseForgotButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getBaseContext(), "Bravo poisson rouge bien ouej", Toast.LENGTH_LONG).show();
             }
         });
 
