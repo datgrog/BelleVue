@@ -96,4 +96,4 @@
         app:backgroundTint="@color/pri_dark"
         app:layout_anchorGravity="bottom|right|end"/>
 
-</android.support.design.widget.CoordinatorLayout><!-- From: file:/C:/Users/asusss/Desktop/BelleVue/BelleVue/src/main/res/layout/add_new_vue.xml -->
+</android.support.design.widget.CoordinatorLayout><!-- From: file:/home/guidis/Projects/BelleVue/BelleVue/src/main/res/layout/add_new_vue.xml -->

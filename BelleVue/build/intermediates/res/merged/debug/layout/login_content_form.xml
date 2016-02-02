@@ -63,4 +63,4 @@
         android:id="@+id/text_view2
         android:text="Text Line 2" /> -->
 </RelativeLayout>
-<!-- From: file:/C:/Users/asusss/Desktop/BelleVue/BelleVue/src/main/res/layout/login_content_form.xml -->
+<!-- From: file:/home/guidis/Projects/BelleVue/BelleVue/src/main/res/layout/login_content_form.xml -->
