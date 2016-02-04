@@ -21,6 +21,9 @@ import android.widget.Toast;
 
 import com.parse.ParseAnalytics;
 
+/**
+ * Created by guidis on ?.
+ */
 
 public class SignInUp extends AppCompatActivity {
 
@@ -55,15 +58,15 @@ public class SignInUp extends AppCompatActivity {
         testObject.put("login", "login_bar");
         testObject.saveInBackground(); */
 
-        TextView logo = (TextView) findViewById(R.id.app_logo);
-        logo.setTypeface(com.bellevue.starter.CustomFontsLoader.getTypeface(this, com.bellevue.starter.CustomFontsLoader.Allura));
+        // TextView logo = (TextView) findViewById(R.id.app_logo);
+        // logo.setTypeface(com.bellevue.starter.CustomFontsLoader.getTypeface(this, com.bellevue.starter.CustomFontsLoader.Allura));
 
         parseLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*Intent bellevue = new Intent(getApplicationContext(), BelleVue.class);
+                Intent bellevue = new Intent(getApplicationContext(), BelleVue.class);
                 startActivity(bellevue);
-                finish();*/
+                finish();
                 login_username = (EditText) findViewById(R.id.login_username_input);
                 login_password = (EditText) findViewById(R.id.login_password_input);
 

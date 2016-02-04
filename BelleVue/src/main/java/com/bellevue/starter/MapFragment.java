@@ -30,6 +30,7 @@ import java.io.IOException;
 /**
  * Created by Paul on 8/11/15.
  */
+
 public class MapFragment extends SupportMapFragment implements GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
         GoogleMap.OnInfoWindowClickListener,

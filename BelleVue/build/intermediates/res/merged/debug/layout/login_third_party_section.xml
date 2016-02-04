@@ -26,4 +26,4 @@ android:gravity="center_horizontal">
         android:src="@drawable/ic_google_plus_100"
         android:id="@+id/google" />
 
-</LinearLayout><!-- From: file:/home/guidis/Projects/BelleVue/BelleVue/src/main/res/layout/login_third_party_section.xml -->
+</LinearLayout><!-- From: file:/home/guidis/Downloads/BelleVue/BelleVue/src/main/res/layout/login_third_party_section.xml -->

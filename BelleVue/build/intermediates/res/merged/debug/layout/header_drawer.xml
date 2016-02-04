@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/head"
-    android:layout_width="match_parent"
-    android:layout_height="192dp"
-    android:background="@color/pri_dark"
-    android:padding="16dp"
-    android:orientation="vertical"
-    android:gravity="bottom">
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/head"
+        android:layout_width="match_parent"
+        android:layout_height="192dp"
+        android:background="@color/pri_dark"
+        android:padding="16dp"
+        android:orientation="vertical"
+        android:gravity="bottom">
 
     <TextView
         android:id="@+id/htv"
@@ -14,10 +14,24 @@
         android:layout_height="wrap_content" />
 
     <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView" />
+
+    <ImageView
         android:id="@+id/hiv"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:scaleType="fitCenter"/>
+        android:scaleType="fitCenter"
+        android:src="@mipmap/ic_hum"/>
+
+    <EditText
+        android:layout_width="227dp"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:text="Name Surname"
+        android:ems="10"
+        android:id="@+id/editText" />
 
 </LinearLayout>
-<!-- From: file:/home/guidis/Projects/BelleVue/BelleVue/src/main/res/layout/header_drawer.xml -->
+<!-- From: file:/home/guidis/Downloads/BelleVue/BelleVue/src/main/res/layout/header_drawer.xml -->

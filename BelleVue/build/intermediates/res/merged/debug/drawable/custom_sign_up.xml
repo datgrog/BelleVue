@@ -3,4 +3,4 @@
     android:shape="rectangle"
     android:padding="50dp" >
     <solid android:color="@color/background_material_dark"/>
-</shape><!-- From: file:/home/guidis/Projects/BelleVue/BelleVue/src/main/res/drawable/custom_sign_up.xml -->
+</shape><!-- From: file:/home/guidis/Downloads/BelleVue/BelleVue/src/main/res/drawable/custom_sign_up.xml -->

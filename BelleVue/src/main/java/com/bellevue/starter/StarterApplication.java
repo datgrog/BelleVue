@@ -14,6 +14,9 @@ import com.parse.Parse;
 import com.parse.ParseACL;
 import com.parse.ParseUser;
 
+/**
+ * Created by parse on ?.
+ */
 
 public class StarterApplication extends Application {
 

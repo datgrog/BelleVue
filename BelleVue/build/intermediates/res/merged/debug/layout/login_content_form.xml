@@ -2,6 +2,7 @@
     android:id="@+id/scene_container"
     android:layout_height="wrap_content"
     android:layout_width="match_parent"
+    android:layout_marginTop="200dp"
     android:layout_marginLeft="10dp"
     android:layout_marginRight="10dp"
     android:orientation="vertical"
@@ -17,7 +18,9 @@
         android:layout_marginBottom="15dp"
         android:text="Get started !"
         android:textSize="24sp"
-        android:textColor="@color/bac"/>
+        android:textColor="@color/primary_text_default_material_dark"
+        android:textStyle="bold"
+       />
 
     <EditText
         android:id="@+id/login_username_input"
@@ -50,7 +53,9 @@
         android:layout_below="@+id/login_password_input"
         android:layout_centerHorizontal="true"
         style="@style/ParseLoginUI.HelpButton"
-        android:text="@string/com_parse_ui_forgot_password_button_label" />
+        android:text="@string/com_parse_ui_forgot_password_button_label"
+        android:textColor="@color/primary_text_default_material_dark"
+        android:textStyle="bold"/>
 
     <!-- <TextView
         android:id="@+id/text_view1
@@ -59,4 +64,4 @@
         android:id="@+id/text_view2
         android:text="Text Line 2" /> -->
 </RelativeLayout>
-<!-- From: file:/home/guidis/Projects/BelleVue/BelleVue/src/main/res/layout/login_content_form.xml -->
+<!-- From: file:/home/guidis/Downloads/BelleVue/BelleVue/src/main/res/layout/login_content_form.xml -->

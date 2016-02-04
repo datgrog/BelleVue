@@ -3,15 +3,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".MainAct">
     <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/border"
-            android:title="Test 1"/>
-        <item
-            android:id="@+id/rottie"
-            android:checked="true"
-            android:title="Test 2"/>
-        <item
-            android:id="@+id/dachs"
-            android:title="Test 3"/>
+
+            <item
+                android:id="@+id/border"
+                android:title="Mes Vues"/>
+
+        <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/landscape"
+                    android:checked="true"
+                    android:title="Panorama"/>
+                <item
+                    android:id="@+id/water_point"
+                    android:checked="true"
+                    android:title="Point d'Eau"/>
+                <item
+                    android:id="@+id/garden_point"
+                    android:checked="true"
+                    android:title="Jardin"/>
+                <item
+                    android:id="@+id/place"
+                    android:checked="true"
+                    android:title="Places"/>
+            </group>
     </group>
 </menu>
