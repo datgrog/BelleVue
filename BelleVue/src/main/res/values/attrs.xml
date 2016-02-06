@@ -3,4 +3,10 @@
     <declare-styleable name="MyGallery">
         <attr name="android:galleryItemBackground" />
     </declare-styleable>
+    <declare-styleable name="SlideShow">
+        <attr name="dotSelected" format="color"/>
+        <attr name="dotNormal" format="color"/>
+        <attr name="dotRadius" format="dimension"/>
+        <attr name="dotMargin" format="dimension"/>
+    </declare-styleable>
 </resources>

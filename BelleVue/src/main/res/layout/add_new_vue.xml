@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:slideshow="http://schemas.android.com/tools">
 
     <LinearLayout android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -50,13 +50,10 @@
                 android:backgroundTint="#ff00ddff"/>
         </LinearLayout>-->
 
-        <LinearLayout
-            android:id="@+id/viewA"
+        <com.daimajia.slider.library.SliderLayout
+            android:id="@+id/slider"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="0.6"
-            android:background="@android:color/holo_blue_dark"
-            android:orientation="horizontal"
+            android:layout_height="300dp"
             />
 
         <LinearLayout
@@ -108,7 +105,7 @@
         android:layout_margin="16dp"
         android:clickable="true"
         android:src="@mipmap/ic_photo"
-        app:layout_anchor="@id/viewA"
+        app:layout_anchor="@id/slider"
         app:backgroundTint="@color/pri_dark"
         app:layout_anchorGravity="bottom|right|end"/>
 
