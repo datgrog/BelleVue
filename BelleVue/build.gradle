@@ -34,7 +34,6 @@ dependencies {
     compile 'com.nineoldandroids:library:2.4.0'
     compile 'com.daimajia.slider:library:1.0.9@aar'
 
-    /* Material Text Field https://bintray.com/florent37/maven/MaterialTextField/1.0.2/view */
-    compile 'com.android.support:cardview-v7:22.2.1'
-    compile 'com.nineoldandroids:library:2.4.0'
+    /* Bubble Tip https://android-arsenal.com/details/1/2609 */
+    compile 'com.github.lguipeng:BubbleView:b2557af1c9'
 }

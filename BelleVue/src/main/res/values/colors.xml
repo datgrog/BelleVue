@@ -34,4 +34,9 @@
     <color name="com_parse_ui_twitter_login_button_focus">#2788BE</color>
     <color name="blu_logo">#2980b9</color>
 
+    <!-- Categories colors-->
+    <color name="landscape">#eeff41</color>
+    <color name="water_point">#03a9f4</color>
+    <color name="garden_point">#b2ff59</color>
+    <color name="place">#6889ff</color>
 </resources>
