@@ -15,6 +15,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.parse.ParseUser;
+
 /**
  * Created by guidis on 1/30/16.
  */
@@ -28,14 +30,20 @@ public class BelleVue extends AppCompatActivity {
     private NavigationView nav;
     private DrawerLayout dl;
     private FloatingActionButton addButton;
+    private TextView user_name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.belle_vue);
 
+        user_name = (TextView) findViewById(R.id.user_name);
         addButton = (FloatingActionButton) findViewById(R.id.addBut);
 
+        //if (getIntent().getExtras().getString("user_name") != null)
+            user_name.append(getIntent().getExtras().getString("user_name"));
+        // else
+        //    user_name.append("coucoutwa");
 
         dl = (DrawerLayout) findViewById(R.id.drawer_layout);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);

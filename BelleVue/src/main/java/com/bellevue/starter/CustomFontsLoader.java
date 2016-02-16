@@ -25,6 +25,8 @@ public class CustomFontsLoader {
             "fonts/AlexBrush.ttf"
     };
 
+    // TextView logo = (TextView) findViewById(R.id.app_logo);
+    // logo.setTypeface(com.bellevue.starter.CustomFontsLoader.getTypeface(this, com.bellevue.starter.CustomFontsLoader.Allura));
 
     /**
      * Returns a loaded custom font based on it's identifier.

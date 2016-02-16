@@ -25,7 +25,6 @@
         android:drawableLeft="@drawable/ic_account_circle_black_24dp"
         android:drawablePadding="8dp"
         android:background="@drawable/custom_edit_text"
-        android:fontFamily="sans-serif"
         android:hint="@string/com_parse_ui_username_input_hint" />
 
     <EditText
@@ -39,8 +38,7 @@
         android:drawablePadding="8dp"
         android:background="@drawable/custom_edit_text"
         android:hint="@string/com_parse_ui_password_input_hint"
-        android:inputType="textPassword"
-        android:fontFamily="sans-serif" />
+        android:inputType="textPassword" />
 
     <EditText
         android:id="@+id/signup_confirm_password_input"
@@ -53,8 +51,7 @@
         android:drawablePadding="8dp"
         android:background="@drawable/custom_edit_text"
         android:hint="@string/com_parse_ui_confirm_password_input_hint"
-        android:inputType="textPassword"
-        android:fontFamily="sans-serif" />
+        android:inputType="textPassword" />
     <!-- style="@style/ParseLoginUI.EditText" -->
 
     <EditText
@@ -68,14 +65,14 @@
         android:drawablePadding="8dp"
         android:background="@drawable/custom_edit_text"
         android:hint="@string/com_parse_ui_email_input_hint"
-        android:inputType="textEmailAddress"
-        android:fontFamily="sans-serif"/>
+        android:inputType="textEmailAddress" />
 
     <EditText
         android:id="@+id/signup_name_input"
         android:layout_below="@+id/signup_email_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:maxLength="20"
         android:layout_marginTop="15dp"
         android:padding="12dp"
         android:drawableLeft="@drawable/ic_mood_black_24dp"

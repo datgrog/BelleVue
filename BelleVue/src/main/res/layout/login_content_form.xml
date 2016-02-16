@@ -27,12 +27,13 @@
         android:layout_below="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:maxLength="20"
         android:padding="12dp"
         android:drawableLeft="@drawable/ic_account_circle_black_24dp"
         android:drawablePadding="8dp"
         android:background="@drawable/custom_edit_text"
-        android:fontFamily="sans-serif"
-        android:hint="@string/com_parse_ui_username_input_hint" />
+        android:hint="@string/com_parse_ui_username_input_hint"
+        android:inputType="textNoSuggestions"/>
 
     <EditText
         android:id="@+id/login_password_input"
@@ -45,8 +46,7 @@
         android:drawablePadding="8dp"
         android:background="@drawable/custom_edit_text"
         android:hint="@string/com_parse_ui_password_input_hint"
-        android:inputType="textPassword"
-        android:fontFamily="sans-serif" />
+        android:inputType="textPassword"/>
 
     <Button
         android:id="@+id/parse_login_help"
