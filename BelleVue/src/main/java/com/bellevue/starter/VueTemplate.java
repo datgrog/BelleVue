@@ -1,16 +1,19 @@
 package com.bellevue.starter;
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.PorterDuff;
-import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -21,20 +24,28 @@ import android.widget.Toast;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
 
-/**
- * Created by gorkum on 31.01.2016.
- */
-public class VueTemplate extends AppCompatActivity {
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
-    static SliderLayout sliderShow;
+public class VueTemplate extends AppCompatActivity {
+    static int TAKE_PIC =1;
+    Uri outPutfileUri;
+    int pictureId = 0;
+    List<File> files = new ArrayList<>();
+
+    static  SliderLayout sliderShow;
+    private FloatingActionButton addPhoto;
     RadioButton m_one, m_two, m_three, m_four;
     android.support.design.widget.TextInputLayout t1,t2;
     LinearLayout botLay;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_vue);
 
+        addPhoto = (FloatingActionButton) findViewById(R.id.camera);
 
         /* Initialise toolbar */
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -71,6 +82,9 @@ public class VueTemplate extends AppCompatActivity {
         sliderShow.addSlider(picture1);
         sliderShow.addSlider(picture2);
         sliderShow.addSlider(picture3);
+
+        /* Take Picture */
+        takePhoto();
 
         /* Initialise select categorie */
         Resources res = getResources();
@@ -115,7 +129,6 @@ public class VueTemplate extends AppCompatActivity {
         m_two = (RadioButton) findViewById(R.id.rad2);
         m_three = (RadioButton) findViewById(R.id.rad3);
         m_four = (RadioButton) findViewById(R.id.rad4);
-
 
         t1 = (android.support.design.widget.TextInputLayout) findViewById(R.id.text1);
         t2 = (android.support.design.widget.TextInputLayout) findViewById(R.id.text2);
@@ -181,22 +194,39 @@ public class VueTemplate extends AppCompatActivity {
         });
     }
 
+    private void takePhoto() {
 
+        addPhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                files.add(new File(Environment.getExternalStorageDirectory(),
+                        String.valueOf(pictureId)));
+                intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(files.get(pictureId)).toString());
+                startActivityForResult(intent, TAKE_PIC);
+            }
+        });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode,Intent data)
+    {
+        if (requestCode == TAKE_PIC && resultCode==RESULT_OK){
+            TextSliderView pic_test = new TextSliderView(this);
+            pic_test
+                    .description("C'est bon sa")
+                    .image(Uri.fromFile(files.get(0)).toString());
+            sliderShow.addSlider(pic_test);
+            Toast.makeText(this, "DONC : " + Uri.fromFile(files.get(pictureId)).toString(),Toast.LENGTH_LONG).show();
+            pictureId++;
+        }
+    }
 
     @Override
     public void onBackPressed() {
         sliderShow.stopAutoCycle();
         super.onBackPressed();
     }
-
-    @Override
-    protected void onStop() {
-
-        super.onStop();
-    }
-
-
-
 
     public void onRadioButtonClicked(View view) {
         // Is the button now checked?
