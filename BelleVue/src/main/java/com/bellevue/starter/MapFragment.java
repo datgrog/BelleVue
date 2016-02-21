@@ -123,7 +123,7 @@ public class MapFragment extends SupportMapFragment implements GoogleApiClient.C
     public void onConnected(Bundle bundle) {
         mCurrentLocation = LocationServices.FusedLocationApi.getLastLocation( mGoogleApiClient );
 
-        initCamera( mCurrentLocation );
+       // initCamera( mCurrentLocation );
     }
 
     @Override

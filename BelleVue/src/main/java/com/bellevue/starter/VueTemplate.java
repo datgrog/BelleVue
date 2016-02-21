@@ -116,6 +116,7 @@ public class VueTemplate extends AppCompatActivity {
         m_three = (RadioButton) findViewById(R.id.rad3);
         m_four = (RadioButton) findViewById(R.id.rad4);
 
+
         t1 = (android.support.design.widget.TextInputLayout) findViewById(R.id.text1);
         t2 = (android.support.design.widget.TextInputLayout) findViewById(R.id.text2);
 
