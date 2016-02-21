@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item android:id="@+id/save"
         android:icon="@drawable/ic_action_content_save"
+        android:onClick="saveVueClick"
         app:showAsAction="always"
         android:title="Save" />
 </menu>

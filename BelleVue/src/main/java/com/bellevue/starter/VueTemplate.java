@@ -1,40 +1,68 @@
 package com.bellevue.starter;
 
+import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.PorterDuff;
-import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.MotionEvent;
+import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bellevue.starter.Utils.Tool;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
 
-/**
- * Created by gorkum on 31.01.2016.
- */
-public class VueTemplate extends AppCompatActivity {
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
-    static SliderLayout sliderShow;
+public class VueTemplate extends AppCompatActivity {
+    static int TAKE_PIC =1;
+    Uri outPutfileUri;
+    int pictureId = 0;
+    List<File> files = new ArrayList<>();
+
+    static  SliderLayout sliderShow;
+    private FloatingActionButton addPhoto;
     RadioButton m_one, m_two, m_three, m_four;
     android.support.design.widget.TextInputLayout t1,t2;
     LinearLayout botLay;
+
+    private String myLat;
+    private String myLng;
+
+    private EditText name_input;
+    private EditText description_input;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_vue);
 
+        myLat = String.valueOf(MapFragment.mCurrentLocation.getLatitude());
+        myLng = String.valueOf(MapFragment.mCurrentLocation.getLongitude());
+
+        Toast.makeText(getBaseContext(), "Lat : " + myLng + "\nLng : " + myLng, Toast.LENGTH_SHORT).show();
+
+        addPhoto = (FloatingActionButton) findViewById(R.id.camera);
 
         /* Initialise toolbar */
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -42,7 +70,6 @@ public class VueTemplate extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sliderShow.stopAutoCycle();
                 finish();
 
             }
@@ -56,21 +83,17 @@ public class VueTemplate extends AppCompatActivity {
         /* Initialise slider */
         sliderShow = (SliderLayout) findViewById(R.id.slider);
 
-        TextSliderView picture1 = new TextSliderView(this);
-        TextSliderView picture2 = new TextSliderView(this);
-        TextSliderView picture3 = new TextSliderView(this);
-        picture1
-                .description("C'est beau")
-                .image("https://scontent-cdg2-1.cdninstagram.com/t51.2885-15/e35/918148_1547918848868274_666499907_n.jpg");
-        picture2
-                .description("C'est jolie")
-                .image("https://scontent-cdg2-1.cdninstagram.com/t51.2885-15/e35/12479464_168519510188114_1077368796_n.jpg");
-        picture3
-                .description("C'est swag")
-                .image("https://scontent-cdg2-1.cdninstagram.com/l/t51.2885-15/e35/12547337_542152145944458_826762616_n.jpg");
-        sliderShow.addSlider(picture1);
-        sliderShow.addSlider(picture2);
-        sliderShow.addSlider(picture3);
+        if (pictureId == 0) {
+            TextSliderView picture1 = new TextSliderView(this);
+            picture1
+                    .description("Take some pictures !")
+                    .image("https://tedconfblog.files.wordpress.com/2014/12/8photography_tips.png");
+            sliderShow.addSlider(picture1);
+            sliderShow.stopAutoCycle();
+        }
+
+        /* Take Picture */
+        takePhoto();
 
         /* Initialise select categorie */
         Resources res = getResources();
@@ -115,7 +138,6 @@ public class VueTemplate extends AppCompatActivity {
         m_two = (RadioButton) findViewById(R.id.rad2);
         m_three = (RadioButton) findViewById(R.id.rad3);
         m_four = (RadioButton) findViewById(R.id.rad4);
-
 
         t1 = (android.support.design.widget.TextInputLayout) findViewById(R.id.text1);
         t2 = (android.support.design.widget.TextInputLayout) findViewById(R.id.text2);
@@ -181,22 +203,86 @@ public class VueTemplate extends AppCompatActivity {
         });
     }
 
+    public void saveVueClick(MenuItem item) {
+        boolean sucess = false;
 
+        name_input        = (EditText) findViewById(R.id.vue_name);
+        description_input = (EditText) findViewById(R.id.vue_description);
+
+        if (Tool.check_content_radio_button(m_one, m_two, m_three, m_four))
+            Toast.makeText(getBaseContext(), "ONE IS CHECKED" , Toast.LENGTH_SHORT).show();
+        else {
+            Toast.makeText(getBaseContext(), "NO_ONE IS CHECKED" , Toast.LENGTH_SHORT).show();
+        }
+
+        boolean isSave;
+        View focusView = null;
+
+        String name         = name_input.getText().toString();
+        String description  = description_input.getText().toString();
+
+        Toast.makeText(getBaseContext(), name + "\n" + description , Toast.LENGTH_SHORT).show();
+
+        // isSave = Tool.check_content_edittext(name, description, focusView);
+
+        /* SEND VUE TO PARSE */
+        //if (isSave) signUpProcess(user, password, email, name);
+    }
+
+
+    private void takePhoto() {
+
+        addPhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                File root = new File(Tool.root_path);
+                boolean dir_created = false;
+                if (!root.exists()) {
+                    dir_created = root.mkdir();
+                    if (!dir_created) {
+                        Toast.makeText(getBaseContext(), "Probleme save directory", Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
+                }
+
+                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+                /* if pictureId == 0 reset root directory */
+                if (pictureId == 0) Tool.reset_bellevue_dir(root);
+
+                File photo = new File(Tool.root_path,
+                        "tmp_pic" + String.valueOf(pictureId));
+                outPutfileUri = Uri.fromFile(photo);
+                files.add(photo);
+                Log.d("var file[" + String.valueOf(pictureId) + "] : ", Uri.fromFile(files.get(pictureId)).toString());
+                intent.putExtra(MediaStore.EXTRA_OUTPUT, outPutfileUri);
+                startActivityForResult(intent, TAKE_PIC);
+            }
+        });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        if (requestCode == TAKE_PIC && resultCode==RESULT_OK){
+            if (pictureId == 0) sliderShow.removeAllSliders();
+            TextSliderView pic_test = new TextSliderView(this);
+            pic_test
+                    .description("C'est bon sa")
+                    .image(outPutfileUri.toString());
+            sliderShow.addSlider(pic_test);
+            pictureId++;
+        }
+    }
 
     @Override
     public void onBackPressed() {
         sliderShow.stopAutoCycle();
+        /* Check BelleVue directory */
+        //Tool.reset_bellevue_dir();
         super.onBackPressed();
     }
-
-    @Override
-    protected void onStop() {
-
-        super.onStop();
-    }
-
-
-
 
     public void onRadioButtonClicked(View view) {
         // Is the button now checked?

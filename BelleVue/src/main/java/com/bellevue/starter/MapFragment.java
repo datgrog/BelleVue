@@ -1,9 +1,11 @@
 package com.bellevue.starter;
 
+import android.app.Activity;
 import android.graphics.BitmapFactory;
 import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -40,18 +42,25 @@ public class MapFragment extends SupportMapFragment implements GoogleApiClient.C
 
     private GoogleApiClient mGoogleApiClient;
 
-    private Location mCurrentLocation;
+    public static Location mCurrentLocation;
 
     private final int[] MAP_TYPES = {
             GoogleMap.MAP_TYPE_SATELLITE,
-            GoogleMap.MAP_TYPE_NORMAL,
             GoogleMap.MAP_TYPE_HYBRID,
-            GoogleMap.MAP_TYPE_TERRAIN,
             GoogleMap.MAP_TYPE_NONE
     };
 
     private int curMapTypeIndex = 0;
-
+    /* implements GoogleMap.OnMyLocationChangeListener
+            getMap().setOnMyLocationChangeListener(this);
+            getMap().setOnMyLocationChangeListener(null);
+        @Override
+        public void onMyLocationChange(Location location) {
+            getMap().addMarker(new MarkerOptions().position(new LatLng( location.getLatitude(), location.getLongitude())).icon(
+                    BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
+            Log.d("OOUPS", "REFRESH EVERY SINGLE TIME");
+        }
+    */
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -70,7 +79,7 @@ public class MapFragment extends SupportMapFragment implements GoogleApiClient.C
     private void initListeners() {
         getMap().setOnMarkerClickListener(this);
         getMap().setOnMapLongClickListener(this);
-        getMap().setOnInfoWindowClickListener( this );
+        getMap().setOnInfoWindowClickListener(this);
         getMap().setOnMapClickListener(this);
     }
 
@@ -100,9 +109,9 @@ public class MapFragment extends SupportMapFragment implements GoogleApiClient.C
         getMap().animateCamera( CameraUpdateFactory.newCameraPosition(position), null );
 
         getMap().setMapType( MAP_TYPES[curMapTypeIndex] );
-        getMap().setTrafficEnabled( true );
+        getMap().setTrafficEnabled( false );
         getMap().setMyLocationEnabled( true );
-        getMap().getUiSettings().setZoomControlsEnabled( true );
+        getMap().getUiSettings().setZoomControlsEnabled( false );
     }
 
     @Override
@@ -123,7 +132,7 @@ public class MapFragment extends SupportMapFragment implements GoogleApiClient.C
     public void onConnected(Bundle bundle) {
         mCurrentLocation = LocationServices.FusedLocationApi.getLastLocation( mGoogleApiClient );
 
-       // initCamera( mCurrentLocation );
+        initCamera( mCurrentLocation );
     }
 
     @Override
@@ -135,8 +144,8 @@ public class MapFragment extends SupportMapFragment implements GoogleApiClient.C
     public void onConnectionFailed(ConnectionResult connectionResult) {
         //Create a default location if the Google API Client fails. Placing location at Googleplex
         mCurrentLocation = new Location( "" );
-        mCurrentLocation.setLatitude( 37.422535 );
-        mCurrentLocation.setLongitude( -122.084804 );
+        mCurrentLocation.setLatitude( 48.8567 );
+        mCurrentLocation.setLongitude( 2.3508 );
         initCamera(mCurrentLocation);
     }
 
@@ -182,41 +191,6 @@ public class MapFragment extends SupportMapFragment implements GoogleApiClient.C
         }
 
         return address;
-    }
-
-    private void drawCircle( LatLng location ) {
-        CircleOptions options = new CircleOptions();
-        options.center( location );
-        //Radius in meters
-        options.radius( 10 );
-        options.fillColor( getResources().getColor( R.color.fill_color ) );
-        options.strokeColor( getResources().getColor( R.color.stroke_color ) );
-        options.strokeWidth( 10 );
-        getMap().addCircle(options);
-    }
-
-    private void drawPolygon( LatLng startingLocation ) {
-        LatLng point2 = new LatLng( startingLocation.latitude + .001, startingLocation.longitude );
-        LatLng point3 = new LatLng( startingLocation.latitude, startingLocation.longitude + .001 );
-
-        PolygonOptions options = new PolygonOptions();
-        options.add(startingLocation, point2, point3);
-
-        options.fillColor( getResources().getColor( R.color.fill_color ) );
-        options.strokeColor( getResources().getColor( R.color.stroke_color ) );
-        options.strokeWidth( 10 );
-
-        getMap().addPolygon(options);
-    }
-
-    private void drawOverlay( LatLng location, int width, int height ) {
-        GroundOverlayOptions options = new GroundOverlayOptions();
-        options.position(location, width, height);
-
-        options.image( BitmapDescriptorFactory
-                .fromBitmap(BitmapFactory
-                        .decodeResource(getResources(), R.mipmap.ic_launcher)) );
-        getMap().addGroundOverlay(options);
     }
 
     private void toggleTraffic() {
