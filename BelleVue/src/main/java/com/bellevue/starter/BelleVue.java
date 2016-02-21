@@ -1,6 +1,7 @@
 package com.bellevue.starter;
 
 import android.content.Intent;
+import android.location.Location;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -11,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * Created by guidis on 1/30/16.
@@ -26,6 +28,7 @@ public class BelleVue extends AppCompatActivity {
     private DrawerLayout dl;
     private FloatingActionButton addButton;
     private TextView user_name;
+    private Location currentLocation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

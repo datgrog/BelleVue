@@ -73,26 +73,11 @@
                 android:gravity="center_vertical"
                 android:text="Catégorie :" />
 
-            <com.github.library.bubbleview.BubbleTextVew
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Hello BubbleTextVew"
-                android:visibility="gone"
-                android:padding="10dp"
-                android:textColor="@android:color/white"
-                app:arrowWidth="8dp"
-                app:angle="8dp"
-                app:arrowHeight="10dp"
-                app:arrowPosition="14dp"
-                app:arrowLocation="left"
-                app:bubbleColor="#7EC0EE"/>
-
             <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical|center_horizontal"
-                android:orientation="horizontal"
-                                >
+                android:orientation="horizontal">
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -209,7 +194,7 @@
     </LinearLayout>
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
+        android:id="@+id/camera"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginRight="5dp"

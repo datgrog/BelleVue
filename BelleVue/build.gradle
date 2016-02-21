@@ -5,7 +5,7 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
-        applicationId "com.parse.starter"
+        applicationId "com.bellevue.starter"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
@@ -33,7 +33,4 @@ dependencies {
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.nineoldandroids:library:2.4.0'
     compile 'com.daimajia.slider:library:1.0.9@aar'
-
-    /* Bubble Tip https://android-arsenal.com/details/1/2609 */
-    compile 'com.github.lguipeng:BubbleView:b2557af1c9'
 }
