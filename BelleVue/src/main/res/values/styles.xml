@@ -12,7 +12,7 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/pri_dark</item>
         <item name="colorPrimaryDark">@color/black</item>
-        <item name="colorAccent">@color/acc</item>
+        <item name="colorAccent">@color/black</item>
         <item name="android:windowBackground">@color/bac</item>
         <item name="android:textColorPrimary">@color/txt</item>
     </style>
@@ -57,5 +57,6 @@
     <style name="ParseLoginUI.EditText" parent="@android:style/Widget.EditText">
         <item name="android:singleLine">true</item>
     </style>
+
 
 </resources>

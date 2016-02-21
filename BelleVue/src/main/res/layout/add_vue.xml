@@ -69,7 +69,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginRight="20dp"
-                android:drawableLeft="@drawable/ic_info_white_24dp"
                 android:drawablePadding="5dp"
                 android:gravity="center_vertical"
                 android:text="Catégorie :" />
@@ -92,8 +91,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical|center_horizontal"
-                android:orientation="horizontal" >
-
+                android:orientation="horizontal"
+                                >
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -104,9 +103,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@drawable/ic_add_location_white_24dp" />
-                    <android.support.v7.widget.AppCompatRadioButton
+                    <RadioButton
+                        android:id="@+id/rad1"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:buttonTint="@color/water_point"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -118,9 +119,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@drawable/ic_add_location_white_24dp" />
-                    <android.support.v7.widget.AppCompatRadioButton
+                    <RadioButton
+                        android:id="@+id/rad2"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:buttonTint="@color/garden_point"/>
+
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -132,9 +136,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@drawable/ic_add_location_white_24dp" />
-                    <android.support.v7.widget.AppCompatRadioButton
+                    <RadioButton
+                        android:id="@+id/rad3"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:buttonTint="@color/landscape"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -146,19 +152,24 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@drawable/ic_add_location_white_24dp" />
-                    <android.support.v7.widget.AppCompatRadioButton
+                    <RadioButton
+                        android:id="@+id/rad4"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:buttonTint="@color/place"/>
                 </LinearLayout>
+
             </RadioGroup>
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/bottomLay"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:gravity="center_horizontal">
 
             <android.support.design.widget.TextInputLayout
+                android:id="@+id/text1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp">
@@ -170,11 +181,13 @@
                     android:hint="Surnome cette vue"
                     android:inputType="textEmailAddress"
                     android:maxLines="1"
+                    android:maxLength="40"
                     android:singleLine="true" />
 
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
+                android:id="@+id/text2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -185,6 +198,7 @@
                     android:hint="Ta description"
                     android:inputType="textEmailAddress"
                     android:maxLines="5"
+                    android:maxLength="150"
                     android:singleLine="true" />
 
             </android.support.design.widget.TextInputLayout>
