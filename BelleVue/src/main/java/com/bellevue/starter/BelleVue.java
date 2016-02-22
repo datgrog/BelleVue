@@ -12,7 +12,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 /**
  * Created by guidis on 1/30/16.
@@ -60,7 +59,7 @@ public class BelleVue extends AppCompatActivity {
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent vueTemp = new Intent(getApplicationContext(), VueTemplate.class);
+                Intent vueTemp = new Intent(getApplicationContext(), AddVue.class);
                 startActivity(vueTemp);
             }
         });

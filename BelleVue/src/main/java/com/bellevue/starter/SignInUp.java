@@ -196,11 +196,11 @@ public class SignInUp extends AppCompatActivity {
 
         // USER
         if (TextUtils.isEmpty(user)) {
-            signup_user.setError("PUTAIN C VIDE");
+            signup_user.setError("Ce champ est vide");
             focusView = signup_user;
             cancel = true;
         } else if (isUsernameInvalid(user)) {
-            signup_user.setError("RETIRE LES ESPACES PTIN");
+            signup_user.setError("Ce champ comporte des espaces");
             focusView = signup_user;
             cancel = true;
         }
@@ -222,12 +222,12 @@ public class SignInUp extends AppCompatActivity {
 
         // EMAIL
         if (TextUtils.isEmpty(email)) {
-            signup_email.setError("PUTAIN C VIDE");
+            signup_email.setError("Ce champ est vide");
             if (focusView == null)
                 focusView = signup_email;
             cancel = true;
         } else if (!isEmailValid(email)) {
-            signup_email.setError("PAYE TON EMAIL STP");
+            signup_email.setError("L'email n'est pas valide");
             if (focusView == null)
                 focusView = signup_email;
             cancel = true;
