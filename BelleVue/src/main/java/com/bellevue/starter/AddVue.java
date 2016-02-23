@@ -82,6 +82,9 @@ public class AddVue extends AppCompatActivity {
         sliderShow = (SliderLayout) findViewById(R.id.slider);
 
         if (pictureId == 0) {
+            /* In case you add another Vue slider need to be reset */
+            sliderShow.removeAllSliders();
+
             TextSliderView picture1 = new TextSliderView(this);
             picture1
                     .description("Take some pictures !")
@@ -210,8 +213,12 @@ public class AddVue extends AppCompatActivity {
         name_input        = (EditText) findViewById(R.id.vue_name);
         description_input = (EditText) findViewById(R.id.vue_description);
 
+        // CHECK PICTURE
+
+        // CHECK RADIO BUTTON
         if (Tool.check_content_radio_button(m_one, m_two, m_three, m_four)) {
             categorie = Tool.get_categorie(m_one, m_two, m_three, m_four);
+            sucess = true;
         }
 
         boolean isSave;
@@ -222,7 +229,9 @@ public class AddVue extends AppCompatActivity {
 
         Toast.makeText(getBaseContext(), name + "\n" + description , Toast.LENGTH_SHORT).show();
 
-        sucess = Tool.check_content_edittext(name, description, name_input, description_input);
+        // CHECK EDITEXT CONTENT
+        if (sucess)
+            sucess = Tool.check_content_edittext(name, description, name_input, description_input);
 
         /* SEND VUE TO PARSE */
         if (sucess) {
@@ -260,7 +269,7 @@ public class AddVue extends AppCompatActivity {
             try {
                 pictureTmp = Files.toByteArray(files.get(cptrPicture));
                 // pictureList.add(new ParseFile("resume.txt", pictureTmp));
-                pictures.put("picture" + String.valueOf(cptrPicture), pictureTmp);
+                pictures.put("picture" + String.valueOf(cptrPicture), new ParseFile(files.get(cptrPicture).getName(), pictureTmp));
             } catch (IOException e) {                File root = new File(Tool.root_path);
                 Log.d("Convert Picture", "FAILED AT LIST INDEX " + String.valueOf(cptrPicture));
             }
