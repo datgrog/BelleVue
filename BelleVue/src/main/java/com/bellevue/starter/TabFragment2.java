@@ -90,7 +90,7 @@ public class TabFragment2 extends Fragment {
         for (int i = 0; i < 10; i++) {
             HashMap<String, String> hm = new HashMap<String, String>();
             hm.put("txt", countries[i]);
-            hm.put("com", "Comment: " + currency[i]);
+            hm.put("com",  currency[i]);
             hm.put("pic", Integer.toString(pics[i]));
             aList.add(hm);
         }
