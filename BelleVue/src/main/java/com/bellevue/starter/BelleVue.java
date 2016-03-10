@@ -9,9 +9,16 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.parse.GetCallback;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
 
 /**
  * Created by guidis on 1/30/16.
@@ -63,7 +70,5 @@ public class BelleVue extends AppCompatActivity {
                 startActivity(vueTemp);
             }
         });
-
-
     }
 }

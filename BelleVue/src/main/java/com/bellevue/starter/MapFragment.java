@@ -26,8 +26,14 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolygonOptions;
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseGeoPoint;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
 
 import java.io.IOException;
+import java.util.List;
 
 /**
  * Created by Paul on 8/11/15.
@@ -108,10 +114,47 @@ public class MapFragment extends SupportMapFragment implements GoogleApiClient.C
 
         getMap().animateCamera( CameraUpdateFactory.newCameraPosition(position), null );
 
-        getMap().setMapType( MAP_TYPES[curMapTypeIndex] );
-        getMap().setTrafficEnabled( false );
-        getMap().setMyLocationEnabled( true );
-        getMap().getUiSettings().setZoomControlsEnabled( false );
+        getMap().setMapType(MAP_TYPES[curMapTypeIndex]);
+        getMap().setTrafficEnabled(false);
+        getMap().setMyLocationEnabled(true);
+        getMap().getUiSettings().setZoomControlsEnabled(false);
+        getMap().setOnMyLocationButtonClickListener(new GoogleMap.OnMyLocationButtonClickListener() {
+            @Override
+            public boolean onMyLocationButtonClick() {
+                //TODO: Any custom actions
+                Toast.makeText(getActivity(), "G CLIKAY", Toast.LENGTH_SHORT).show();
+
+                ParseGeoPoint userLocation = new ParseGeoPoint(MapFragment.mCurrentLocation.getLatitude(),
+                        MapFragment.mCurrentLocation.getLongitude());
+                ParseQuery<ParseObject> query = ParseQuery.getQuery("BelleVue");
+                query.whereNear("location", userLocation);
+                query.setLimit(10);
+                query.findInBackground(new FindCallback<ParseObject>() {
+                    public void done(List<ParseObject> belleVueList, ParseException e) {
+                        if (e == null) {
+                            Log.d("score", "Retrieved " + belleVueList.size() + " scores");
+                            // List<Marker> markerList; NEED TO STORE THEM ALL
+                            LatLng latLng;
+                            for (ParseObject belleVue : belleVueList) {
+
+                                latLng = new LatLng(((ParseGeoPoint)belleVue.get("location")).getLatitude(),
+                                                    ((ParseGeoPoint)belleVue.get("location")).getLongitude());
+                                MarkerOptions options = new MarkerOptions().position( latLng );
+                                options.title( "Coucou twa" );
+
+                                options.icon( BitmapDescriptorFactory.defaultMarker() );
+                                getMap().addMarker( options );
+                            }
+                        } else {
+                            Log.d("score", "Error: " + e.getMessage());
+                        }
+                    }
+                });
+
+
+                return false;
+            }
+        });
     }
 
     @Override
@@ -144,7 +187,7 @@ public class MapFragment extends SupportMapFragment implements GoogleApiClient.C
     public void onConnectionFailed(ConnectionResult connectionResult) {
         //Create a default location if the Google API Client fails. Placing location at Googleplex
         mCurrentLocation = new Location( "" );
-        mCurrentLocation.setLatitude( 48.8567 );
+        mCurrentLocation.setLatitude(48.8567);
         mCurrentLocation.setLongitude( 2.3508 );
         initCamera(mCurrentLocation);
     }
