@@ -10,6 +10,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,6 +31,8 @@ public class BelleVue extends AppCompatActivity {
     private TextView user_name;
     private Location currentLocation;
 
+    private Button tryOnly;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +40,8 @@ public class BelleVue extends AppCompatActivity {
 
         user_name = (TextView) findViewById(R.id.user_name);
         addButton = (FloatingActionButton) findViewById(R.id.addBut);
+
+
 
         //  if (getIntent().getExtras().getString("user_name") != null)
         //   user_name.append(getIntent().getExtras().getString("user_name"));
@@ -65,6 +70,15 @@ public class BelleVue extends AppCompatActivity {
             }
         });
 
+
+        tryOnly =(Button) findViewById(R.id.button);
+        tryOnly.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent vueView= new Intent(getApplicationContext(), TabActionBarActivity.class);
+                startActivity(vueView);
+            }
+        });
 
     }
 }
