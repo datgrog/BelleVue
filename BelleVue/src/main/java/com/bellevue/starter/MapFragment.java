@@ -1,6 +1,7 @@
 package com.bellevue.starter;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.location.Geocoder;
 import android.location.Location;
@@ -175,7 +176,7 @@ public class MapFragment extends SupportMapFragment implements GoogleApiClient.C
     public void onConnected(Bundle bundle) {
         mCurrentLocation = LocationServices.FusedLocationApi.getLastLocation( mGoogleApiClient );
 
-//        initCamera( mCurrentLocation );
+        initCamera( mCurrentLocation );
     }
 
     @Override
@@ -211,6 +212,22 @@ public class MapFragment extends SupportMapFragment implements GoogleApiClient.C
 
         options.icon( BitmapDescriptorFactory.defaultMarker() );
         getMap().addMarker( options );
+
+
+        //**** just for now
+        getMap().setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+
+            @Override
+              public boolean onMarkerClick(Marker m) {
+                Intent vueView = new Intent(getActivity().getApplicationContext(), VueViewTabs.class);
+                startActivity(vueView);
+                // vueView.putExtra("user_name","WQFIDPyMIg");
+
+                return true;
+            }
+
+         });
+        //**** just for now
     }
 
     @Override

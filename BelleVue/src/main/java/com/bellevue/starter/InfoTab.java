@@ -18,7 +18,7 @@ import com.daimajia.slider.library.SliderTypes.TextSliderView;
 /**
  * Created by asusss on 9.03.2016.
  */
-public class TabFragment1 extends Fragment {
+public class InfoTab extends Fragment {
 
     int pictureId = 0;
     static SliderLayout sliderShow;

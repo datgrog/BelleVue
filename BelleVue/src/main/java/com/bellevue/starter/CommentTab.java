@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class TabFragment2 extends Fragment {
+public class CommentTab extends Fragment {
 
     List<File> files = new ArrayList<>();
 

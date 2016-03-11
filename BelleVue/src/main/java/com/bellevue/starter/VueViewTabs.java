@@ -10,10 +10,20 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
-public class TabActionBarActivity extends AppCompatActivity {
+
+import com.parse.GetCallback;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
+
+
+
+public class VueViewTabs extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +36,25 @@ public class TabActionBarActivity extends AppCompatActivity {
         tabLayout.addTab(tabLayout.newTab().setText("General Info"));
         tabLayout.addTab(tabLayout.newTab().setText("Comments"));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("BelleVue");
+        query.whereEqualTo("objectId", "WQFIDPyM1g");
+
+        query.getFirstInBackground(new GetCallback<ParseObject>() {
+
+            public void done(ParseObject object, ParseException e) {
+                if (e == null) {
+                    String toto = object.getString("name");
+                    String titi = object.getString("description");
+                  //  Log.d("msg:","Success"+titi+toto);
+                    Toast.makeText(VueViewTabs.this, "Success"+titi+toto, Toast.LENGTH_SHORT).show();
+                } else {
+                    Log.d("problem:",e.getMessage());
+                    Log.d("score", "Retrieved the object.");
+                }
+            }
+        });
+
 
         final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
         final PagerAdapter adapter = new PagerAdapter

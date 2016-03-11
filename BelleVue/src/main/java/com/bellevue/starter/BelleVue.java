@@ -80,7 +80,7 @@ public class BelleVue extends AppCompatActivity {
         tryOnly.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent vueView= new Intent(getApplicationContext(), TabActionBarActivity.class);
+                Intent vueView= new Intent(getApplicationContext(), VueViewTabs.class);
                 startActivity(vueView);
             }
         });
