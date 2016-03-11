@@ -63,7 +63,7 @@
             android:label="@string/app_name" >
         </activity>
         <activity
-            android:name="com.bellevue.starter.TabActionBarActivity"
+            android:name="com.bellevue.starter.VueViewTabs"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
