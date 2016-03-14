@@ -49,6 +49,10 @@ public class MapFragment extends SupportMapFragment implements GoogleApiClient.C
         GoogleMap.OnMapClickListener,
         GoogleMap.OnMarkerClickListener {
 
+    // http://stackoverflow.com/questions/13713726/maps-api-v2-with-different-marker-actions
+    // http://stackoverflow.com/questions/15333971/get-other-values-from-marker
+    private HashMap<String, String> markers= new HashMap<String, String>();
+
     private GoogleApiClient mGoogleApiClient;
 
     public static Location mCurrentLocation;
@@ -159,7 +163,8 @@ public class MapFragment extends SupportMapFragment implements GoogleApiClient.C
                                         options.icon(BitmapDescriptorFactory.defaultMarker());
                                         break;
                                 }
-                                getMap().addMarker(options);
+                                // getMap().addMarker(options);
+                                markers.put(getMap().addMarker(options).getId(), belleVue.getObjectId());
                             }
                         } else {
                             Log.d("score", "Error: " + e.getMessage());
@@ -216,6 +221,10 @@ public class MapFragment extends SupportMapFragment implements GoogleApiClient.C
     @Override
     public boolean onMarkerClick(Marker marker) {
         // marker.showInfoWindow();
+        // Toast.makeText( getActivity(), "Clicked on marker : " + markers.get(marker.getId()), Toast.LENGTH_SHORT ).show();
+        Intent vueView = new Intent(getActivity().getApplicationContext(), VueViewTabs.class);
+        vueView.putExtra("objectId", markers.get(marker.getId()));
+        startActivity(vueView);
         return true;
     }
 

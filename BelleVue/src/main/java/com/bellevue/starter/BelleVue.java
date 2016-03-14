@@ -47,12 +47,10 @@ public class BelleVue extends AppCompatActivity {
         user_name = (TextView) findViewById(R.id.user_name);
         addButton = (FloatingActionButton) findViewById(R.id.addBut);
 
-
-
         //  if (getIntent().getExtras().getString("user_name") != null)
         //   user_name.append(getIntent().getExtras().getString("user_name"));
         // else
-            user_name.append("coucoutwa");
+            user_name.append("DBG_Mode");
 
         dl = (DrawerLayout) findViewById(R.id.drawer_layout);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -75,15 +73,5 @@ public class BelleVue extends AppCompatActivity {
                 startActivity(vueTemp);
             }
         });
-
-        tryOnly =(Button) findViewById(R.id.button);
-        tryOnly.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent vueView= new Intent(getApplicationContext(), VueViewTabs.class);
-                startActivity(vueView);
-            }
-        });
-
     }
 }
