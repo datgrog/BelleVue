@@ -7,33 +7,42 @@ package com.bellevue.starter;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.app.FragmentPagerAdapter;
 
-public class PagerAdapter extends FragmentStatePagerAdapter {
-    int mNumOfTabs;
+import com.parse.ParseObject;
 
-    public PagerAdapter(FragmentManager fm, int NumOfTabs) {
+public class PagerAdapter extends FragmentPagerAdapter {
+    final int PAGE_COUNT = 2;
+
+    private String vueName, vueDescription;
+    private int vueRate;
+    private String tabTitles[] = new String[] { "General Info", "Comments"};
+
+    public PagerAdapter(FragmentManager fm, ParseObject vue) {
         super(fm);
-        this.mNumOfTabs = NumOfTabs;
+        vueName = vue.getString("name");
+        vueDescription = vue.getString("description");
+        vueRate = vue.getInt("rate");
+        // Log.d("PagerAdapter", vue.getString("name"));
     }
 
-    @Override
     public Fragment getItem(int position) {
 
         switch (position) {
             case 0:
-                InfoTab tab1 = new InfoTab();
-                return tab1;
+                return InfoTab.newInstance(vueName, vueDescription, vueRate);
             case 1:
-                CommentTab tab2 = new CommentTab();
-                return tab2;
+                return new CommentTab();
             default:
                 return null;
         }
     }
 
-    @Override
+    public CharSequence getPageTitle(int position) {
+        return tabTitles[position];
+    }
+
     public int getCount() {
-        return mNumOfTabs;
+        return PAGE_COUNT;
     }
 }
