@@ -34,7 +34,6 @@ public class InfoTab extends Fragment {
 
 
         /* Initialise slider */
-
         sliderShow = (SliderLayout) getActivity().findViewById(R.id.slider);
 
         if (pictureId == 0) {
@@ -45,8 +44,6 @@ public class InfoTab extends Fragment {
             sliderShow.addSlider(picture1);
             sliderShow.stopAutoCycle();
         }
-
-
 
         /* Initialise select categorie */
 

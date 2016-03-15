@@ -13,6 +13,8 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -25,12 +27,27 @@ import com.parse.ParseQuery;
 
 public class VueViewTabs extends AppCompatActivity {
 
+    String vueName;
+    String vueDescription;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tabs_main);
+
+        /* Initialise toolbar */
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        toolbar.setNavigationIcon(R.drawable.ic_keyboard_backspace_white_24dp);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+        TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
+        if (mTitle != null)
+            mTitle.setTypeface(com.bellevue.starter.CustomFontsLoader.getTypeface(this, com.bellevue.starter.CustomFontsLoader.AlexBrush));
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         tabLayout.addTab(tabLayout.newTab().setText("General Info"));
@@ -38,19 +55,17 @@ public class VueViewTabs extends AppCompatActivity {
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         ParseQuery<ParseObject> query = ParseQuery.getQuery("BelleVue");
-        query.whereEqualTo("objectId", "WQFIDPyM1g");
+        query.whereEqualTo("objectId", getIntent().getExtras().getString("objectId"));
 
         query.getFirstInBackground(new GetCallback<ParseObject>() {
 
             public void done(ParseObject object, ParseException e) {
                 if (e == null) {
-                    String toto = object.getString("name");
-                    String titi = object.getString("description");
-                  //  Log.d("msg:","Success"+titi+toto);
-                    Toast.makeText(VueViewTabs.this, "Success"+titi+toto, Toast.LENGTH_SHORT).show();
+                    vueName = object.getString("name");
+                    vueDescription = object.getString("description");
+                    Toast.makeText(VueViewTabs.this, "Success "+ vueName + " " + vueDescription, Toast.LENGTH_SHORT).show();
                 } else {
-                    Log.d("problem:",e.getMessage());
-                    Log.d("score", "Retrieved the object.");
+                    Log.d("problem : ", e.getMessage());
                 }
             }
         });
@@ -77,21 +92,5 @@ public class VueViewTabs extends AppCompatActivity {
 
             }
         });
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        //if (id == R.id.action_settings) {
-         //   return true;
-        //}
-
-        return super.onOptionsItemSelected(item);
     }
 }
