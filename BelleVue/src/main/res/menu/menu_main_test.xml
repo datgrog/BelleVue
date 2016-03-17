@@ -5,26 +5,22 @@
     <group android:checkableBehavior="single">
 
             <item
-                android:id="@+id/border"
-                android:title="Mes Vues"/>
-
-        <group android:checkableBehavior="single">
-                <item
-                    android:id="@+id/landscape"
-                    android:checked="true"
-                    android:title="Panorama"/>
-                <item
-                    android:id="@+id/water_point"
-                    android:checked="true"
-                    android:title="Point d'Eau"/>
-                <item
-                    android:id="@+id/garden_point"
-                    android:checked="true"
-                    android:title="Jardin"/>
-                <item
-                    android:id="@+id/place"
-                    android:checked="true"
-                    android:title="Places"/>
+                android:id="@+id/landscape"
+                android:title="Panorama"
+                android:icon="@drawable/ic_landscape_menu"/>
+                android:icon
+            <item
+                android:id="@+id/water_point"
+                android:title="Point d'Eau"
+                android:icon="@drawable/ic_water_menu"/>
+            <item
+                android:id="@+id/garden_point"
+                android:title="Jardin"
+                android:icon="@drawable/ic_garden_menu"/>
+            <item
+                android:id="@+id/place"
+                android:title="Place"
+                android:icon="@drawable/ic_place_menu"/>
             </group>
-    </group>
+
 </menu>

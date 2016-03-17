@@ -10,13 +10,17 @@
 
     <item name="pri" type="color">#cddc39</item>
     <item name="pri_dark" type="color">#1F3A93</item>
+    <item name="pri_light" type="color">#8F9CC9</item>
     <item name="acc" type="color">#f8bbd0</item>
     <item name="bac" type="color">#ffffff</item>
     <item name="txt" type="color">#455a64</item>
     <item name="black" type="color">#000000</item>
     <item name="flat_red" type="color">#D91E18</item>
     <item name="flat_blu" type="color">#59ABE3</item>
-
+    <item name="beautiful_purple" type="color">#542B5E</item>
+    <item name="beauty_green" type="color">#3A931F</item>
+    <item name="Yellow" type="color">#ffff00</item>
+    <item name="Grey_place" type="color"> #CCCCCC</item>
 
     <color name="com_parse_ui_parse_login_button">#40CCCCCC</color>
     <color name="com_parse_ui_parse_login_button_push">#30CCCCCC</color>

@@ -60,7 +60,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:background="@color/com_parse_ui_parse_login_button"
+            android:background="@color/pri_light"
             android:gravity="center_horizontal"
             android:orientation="horizontal">
 
@@ -92,7 +92,7 @@
                         android:id="@+id/rad1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:buttonTint="@color/water_point"/>
+                        android:buttonTint="@color/pri_dark"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -108,7 +108,7 @@
                         android:id="@+id/rad2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:buttonTint="@color/garden_point"/>
+                        android:buttonTint="@color/beauty_green"/>
 
                 </LinearLayout>
                 <LinearLayout
@@ -125,7 +125,7 @@
                         android:id="@+id/rad3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:buttonTint="@color/landscape"/>
+                        android:buttonTint="@color/Yellow"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -141,7 +141,7 @@
                         android:id="@+id/rad4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:buttonTint="@color/place"/>
+                        android:buttonTint="@color/Grey_place"/>
                 </LinearLayout>
 
             </RadioGroup>

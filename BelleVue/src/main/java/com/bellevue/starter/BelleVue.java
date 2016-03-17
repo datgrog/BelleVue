@@ -37,11 +37,12 @@ public class BelleVue extends AppCompatActivity {
 
         user_name = (TextView) findViewById(R.id.user_name);
         addButton = (FloatingActionButton) findViewById(R.id.addBut);
-
+        // titre pour le XML
+        user_name.setTypeface(com.bellevue.starter.CustomFontsLoader.getTypeface(this, com.bellevue.starter.CustomFontsLoader.AlexBrush));
         //  if (getIntent().getExtras().getString("user_name") != null)
         //   user_name.append(getIntent().getExtras().getString("user_name"));
         // else
-            user_name.append("coucoutwa");
+       ///     user_name.append("coucoutwa");
 
         dl = (DrawerLayout) findViewById(R.id.drawer_layout);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
