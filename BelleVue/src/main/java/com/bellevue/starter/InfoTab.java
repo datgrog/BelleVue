@@ -3,6 +3,7 @@ package com.bellevue.starter;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.daimajia.slider.library.SliderLayout;
+import com.daimajia.slider.library.SliderTypes.TextSliderView;
 
 /**
  * Created by asusss on 9.03.2016.
@@ -22,16 +24,23 @@ public class InfoTab extends Fragment {
     private static final String ARG_PARAM1 = "vueName";
     private static final String ARG_PARAM2 = "vueDescription";
     private static final String ARG_PARAM3 = "vueRate";
+    private static final String ARG_PARAM4 = "nbPicture";
+    private static final String ARG_PARAM5 = "uriPictures";
+
     private String vueName;
     private String vueDescription;
     private int    vueRate;
+    private int    nbPicture;
+    private String    uriPicture;
 
-    public static InfoTab newInstance(String vueName, String vueDescription, int vueRate) {
+    public static InfoTab newInstance(String vueName, String vueDescription, int vueRate, int nbPicture, String uriPicture) {
         InfoTab fragment = new InfoTab();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, vueName);
         args.putString(ARG_PARAM2, vueDescription);
         args.putInt(ARG_PARAM3, vueRate);
+        args.putInt(ARG_PARAM4, nbPicture);
+        args.putString(ARG_PARAM5, uriPicture);
         fragment.setArguments(args);
         return fragment;
     }
@@ -47,6 +56,7 @@ public class InfoTab extends Fragment {
             vueName = getArguments().getString(ARG_PARAM1);
             vueDescription = getArguments().getString(ARG_PARAM2);
             vueRate = getArguments().getInt(ARG_PARAM3);
+            uriPicture = getArguments().getString(ARG_PARAM5);
         }
     }
 
@@ -71,8 +81,13 @@ public class InfoTab extends Fragment {
 
         if (pictureId == 0) {
             sliderShow.stopAutoCycle();
+            TextSliderView pic_test = new TextSliderView(getActivity());
+            pic_test
+                    .description("C'est bon sa")
+                    .image(uriPicture);
+            sliderShow.addSlider(pic_test);
+            Log.d("INFO TAB", uriPicture);
         }
 
     }
-
 }
