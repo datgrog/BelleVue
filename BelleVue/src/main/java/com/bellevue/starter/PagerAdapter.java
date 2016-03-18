@@ -24,31 +24,30 @@ import java.util.ArrayList;
 
 public class PagerAdapter extends FragmentPagerAdapter {
     final int PAGE_COUNT = 2;
+    InfoTab infoTab;
 
     private String vueName, vueDescription;
     private int vueRate;
 
-    private int nbPicture;
-    ArrayList<String> uriPictures;
-
     private String tabTitles[] = new String[] { "General Info", "Comments"};
 
-    public PagerAdapter(FragmentManager fm, ParseObject vue, int nbPicture, ArrayList<String> uriPictures) {
+    public PagerAdapter(FragmentManager fm, ParseObject vue) {
         super(fm);
         vueName = vue.getString("name");
         vueDescription = vue.getString("description");
         vueRate = vue.getInt("rate");
+    }
 
-        this.nbPicture = nbPicture;
-        this.uriPictures = uriPictures;
-
+    public void updatePagerAdapter(String uriPicture) {
+        infoTab.updateFragment(uriPicture);
+        Log.d("PagerAdapter : ", "updatepAdapter " + uriPicture);
     }
 
     public Fragment getItem(int position) {
 
         switch (position) {
             case 0:
-                return InfoTab.newInstance(vueName, vueDescription, vueRate, nbPicture, uriPictures);
+                return infoTab = InfoTab.newInstance(vueName, vueDescription, vueRate);
             case 1:
                 return new CommentTab();
             default:

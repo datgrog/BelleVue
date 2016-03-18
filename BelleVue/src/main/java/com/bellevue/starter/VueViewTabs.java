@@ -16,11 +16,13 @@ import com.google.common.io.Files;
 import com.parse.GetCallback;
 import com.parse.GetDataCallback;
 import com.parse.ParseException;
+import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * Created by asusss on 9.03.2016.
@@ -31,6 +33,11 @@ public class VueViewTabs extends AppCompatActivity {
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private String objectId;
+
+    static PagerAdapter pageAdapter;
+    static private int currentPicture = 0;
+    static private int cptr = 0;
+    private ArrayList<String> outPutfileUri = new ArrayList<>();
     private File root = new File(Tool.root_path);
 
     @Override
@@ -42,6 +49,11 @@ public class VueViewTabs extends AppCompatActivity {
         tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         viewPager = (ViewPager) findViewById(R.id.pager);
 
+        if (currentPicture == 0) {
+            cptr = 0;
+            Tool.reset_bellevue_dir(root);
+        }
+
         /* Initialise toolbar */
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setNavigationIcon(R.drawable.ic_keyboard_backspace_white_24dp);
@@ -49,6 +61,7 @@ public class VueViewTabs extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Tool.reset_bellevue_dir(root);
+                currentPicture = 0;
                 finish();
             }
         });
@@ -59,7 +72,79 @@ public class VueViewTabs extends AppCompatActivity {
 
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
-/*
+        /* PHOTO PRINTED SUCESS
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("BelleVue");
+        query.include("Pictures");
+        query.getInBackground("x4kwaCoVyj", new GetCallback<ParseObject>() {
+            public void done(ParseObject vue, ParseException e) {
+                if (e == null) {
+                    ParseFile picture;
+                    pageAdapter = new PagerAdapter(getSupportFragmentManager(), vue);
+
+                    picture = vue.getParseObject("Pictures").getParseFile("picture0");
+                    picture.getDataInBackground(new GetDataCallback() {
+                        @Override
+                        public void done(byte[] data, ParseException e) {
+                            Uri test;
+                            File photo = new File(Tool.root_path, "tmp_pic.jpg");
+                            test = Uri.fromFile(photo);
+                            try {
+                                Files.write(data, photo);
+                                pageAdapter.updatePagerAdapter(test.toString());
+                                Log.d("PICTURE", test.toString());
+                            } catch (IOException io) {
+                                Log.d("PAGER ADAPTER", e.toString());
+                            }
+                        }
+                    });
+
+                    viewPager.setAdapter(pageAdapter);
+                    tabLayout.setupWithViewPager(viewPager);
+                } else {
+                    Log.d("ViewTabs", e.getMessage());
+                }
+            }
+        });*/
+
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("BelleVue");
+        query.include("Pictures");
+        query.getInBackground(objectId, new GetCallback<ParseObject>() {
+            public void done(ParseObject vue, ParseException e) {
+                if (e == null) {
+                    ParseFile picture;
+                    int nbPicture = vue.getParseObject("Pictures").getInt("nbPicture");
+                    Log.d("Nb pic ", String.valueOf(nbPicture));
+                    pageAdapter = new PagerAdapter(getSupportFragmentManager(), vue);
+
+                    for (currentPicture = 0; currentPicture < nbPicture; currentPicture++) {
+                        picture = vue.getParseObject("Pictures").getParseFile("picture" + String.valueOf(currentPicture));
+                        picture.getDataInBackground(new GetDataCallback() {
+                            @Override
+                            public void done(byte[] data, ParseException e) {
+                                ArrayList<Uri> test = new ArrayList<Uri>();
+                                File photo = new File(Tool.root_path,
+                                        "tmp_pic" + String.valueOf(currentPicture) + ".jpg");
+                                test.add(Uri.fromFile(photo));
+                                try {
+                                    Files.write(data, photo);
+                                    Log.d("currentPicture", String.valueOf(currentPicture));
+                                    pageAdapter.updatePagerAdapter(test.get(cptr).toString());
+                                    cptr++;
+                                } catch (IOException io) {
+                                    Log.d("PAGER ADAPTER", e.toString());
+                                }
+                            }
+                        });
+                    }
+                    viewPager.setAdapter(pageAdapter);
+                    tabLayout.setupWithViewPager(viewPager);
+                } else {
+                    Log.d("ViewTabs", e.getMessage());
+                }
+            }
+        });
+
+        /*
         ParseQuery<ParseObject> query = ParseQuery.getQuery("BelleVue");
         query.getInBackground(objectId, new GetCallback<ParseObject>() {
             public void done(ParseObject vue, ParseException e) {
@@ -70,46 +155,15 @@ public class VueViewTabs extends AppCompatActivity {
                     Log.d("ViewTabs", e.getMessage());
                 }
             }
-        });
-        */
-
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("BelleVue");
-        query.include("Pictures");
-        query.getInBackground("x4kwaCoVyj", new GetCallback<ParseObject>() {
-            public void done(ParseObject vue, ParseException e) {
-                if (e == null) {
-                    getParseFile("picture0");
-                    pictures.getDataInBackground(new GetDataCallback() {
-                        @Override
-                        public void done(byte[] data, ParseException e) {
-                            File photo = new File(Tool.root_path,
-                                    "tmp_pic" + String.valueOf(nbPicture) + ".jpg");
-                            outPutfileUri = Uri.fromFile(photo);
-                            try {
-                                Files.write(data, photo);
-                                uriPicture = outPutfileUri.toString();
-                                Log.d("PAGER ADAPTER", uriPicture);
-                            } catch (IOException io) {
-                                Log.d("PAGER ADAPTER", e.toString());
-                            }
-                        }
-                    });
-                    viewPager.setAdapter(new PagerAdapter(getSupportFragmentManager(), vue, vue.getParseObject("Pictures")));
-                    tabLayout.setupWithViewPager(viewPager);
-                    Log.d("ViewTabs : VUE", vue.getString("name"));
-                    Log.d("ViewTabs : PICTURE", String.valueOf(vue.getParseObject("Pictures").getInt("nbPicture")));
-
-                } else {
-                    Log.d("ViewTabs", e.getMessage());
-                }
-            }
-        });
+        });*/
     }
 
     @Override
     public void onBackPressed() {
         /* Check BelleVue directory */
         Tool.reset_bellevue_dir(root);
+        currentPicture = 0;
+        cptr = 0;
         super.onBackPressed();
     }
 

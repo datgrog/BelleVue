@@ -13,12 +13,13 @@ import android.widget.TextView;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
 
+import java.util.ArrayList;
+
 /**
  * Created by asusss on 9.03.2016.
  */
 public class InfoTab extends Fragment {
 
-    int pictureId = 0;
     private SliderLayout sliderShow;
 
     private static final String ARG_PARAM1 = "vueName";
@@ -31,22 +32,29 @@ public class InfoTab extends Fragment {
     private String vueDescription;
     private int    vueRate;
     private int    nbPicture;
-    private String    uriPicture;
+    private ArrayList<String>    uriPicture;
 
-    public static InfoTab newInstance(String vueName, String vueDescription, int vueRate, int nbPicture, String uriPicture) {
+    public static InfoTab newInstance(String vueName, String vueDescription, int vueRate) {
         InfoTab fragment = new InfoTab();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, vueName);
         args.putString(ARG_PARAM2, vueDescription);
         args.putInt(ARG_PARAM3, vueRate);
-        args.putInt(ARG_PARAM4, nbPicture);
-        args.putString(ARG_PARAM5, uriPicture);
         fragment.setArguments(args);
         return fragment;
     }
 
     public InfoTab() {
         // Required empty public constructor
+    }
+
+    public void updateFragment(String uriPicture) {
+        TextSliderView pic_test;
+        pic_test = new TextSliderView(getActivity());
+        pic_test
+                .description("C'est bon sa")
+                .image(uriPicture);
+        sliderShow.addSlider(pic_test);
     }
 
     @Override
@@ -56,7 +64,6 @@ public class InfoTab extends Fragment {
             vueName = getArguments().getString(ARG_PARAM1);
             vueDescription = getArguments().getString(ARG_PARAM2);
             vueRate = getArguments().getInt(ARG_PARAM3);
-            uriPicture = getArguments().getString(ARG_PARAM5);
         }
     }
 
@@ -68,6 +75,7 @@ public class InfoTab extends Fragment {
         TextView  tvDescription  = (TextView) myView.findViewById(R.id.vueDescription);
         RatingBar rtStar         = (RatingBar) myView.findViewById(R.id.ratingBar);
         sliderShow = (SliderLayout) myView.findViewById(R.id.slider);
+        sliderShow.stopAutoCycle();
 
         tvName.setText(vueName);
         tvDescription.setText(vueDescription);
@@ -78,16 +86,13 @@ public class InfoTab extends Fragment {
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-
-        if (pictureId == 0) {
-            sliderShow.stopAutoCycle();
-            TextSliderView pic_test = new TextSliderView(getActivity());
-            pic_test
-                    .description("C'est bon sa")
-                    .image(uriPicture);
-            sliderShow.addSlider(pic_test);
-            Log.d("INFO TAB", uriPicture);
-        }
-
+/*
+        TextSliderView pic_test;
+        pic_test = new TextSliderView(getActivity());
+        pic_test
+                .description("C'est bon sa")
+                .image("http://www.google.fr");
+        sliderShow.addSlider(pic_test);
+        Log.d("onViewCreated", "coucou");*/
     }
 }
