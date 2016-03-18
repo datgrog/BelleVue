@@ -3,7 +3,6 @@ package com.bellevue.starter;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,13 +19,11 @@ import java.util.ArrayList;
  */
 public class InfoTab extends Fragment {
 
-    private SliderLayout sliderShow;
+    static private SliderLayout sliderShow;
 
     private static final String ARG_PARAM1 = "vueName";
     private static final String ARG_PARAM2 = "vueDescription";
     private static final String ARG_PARAM3 = "vueRate";
-    private static final String ARG_PARAM4 = "nbPicture";
-    private static final String ARG_PARAM5 = "uriPictures";
 
     private String vueName;
     private String vueDescription;
@@ -55,6 +52,11 @@ public class InfoTab extends Fragment {
                 .description("C'est bon sa")
                 .image(uriPicture);
         sliderShow.addSlider(pic_test);
+    }
+
+    public void resetSlider() {
+        sliderShow.removeAllSliders();
+        getActivity().getSupportFragmentManager().beginTransaction().remove(this).commit();
     }
 
     @Override
@@ -86,6 +88,7 @@ public class InfoTab extends Fragment {
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
+        sliderShow.removeAllSliders();
 /*
         TextSliderView pic_test;
         pic_test = new TextSliderView(getActivity());

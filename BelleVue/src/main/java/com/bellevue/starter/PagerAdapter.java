@@ -5,22 +5,12 @@ package com.bellevue.starter;
  * Created by asusss on 3.03.2016.
  */
 
-import android.net.Uri;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.util.Log;
 
-import com.bellevue.starter.Utils.Tool;
-import com.google.common.io.Files;
-import com.parse.GetDataCallback;
-import com.parse.ParseException;
-import com.parse.ParseFile;
 import com.parse.ParseObject;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
 
 public class PagerAdapter extends FragmentPagerAdapter {
     final int PAGE_COUNT = 2;
@@ -41,6 +31,10 @@ public class PagerAdapter extends FragmentPagerAdapter {
     public void updatePagerAdapter(String uriPicture) {
         infoTab.updateFragment(uriPicture);
         Log.d("PagerAdapter : ", "updatepAdapter " + uriPicture);
+    }
+
+    public void resetSlider() {
+        infoTab.resetSlider();
     }
 
     public Fragment getItem(int position) {
