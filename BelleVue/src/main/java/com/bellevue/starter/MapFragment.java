@@ -1,7 +1,9 @@
 package com.bellevue.starter;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
@@ -26,8 +28,15 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolygonOptions;
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseGeoPoint;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by Paul on 8/11/15.
@@ -39,6 +48,10 @@ public class MapFragment extends SupportMapFragment implements GoogleApiClient.C
         GoogleMap.OnMapLongClickListener,
         GoogleMap.OnMapClickListener,
         GoogleMap.OnMarkerClickListener {
+
+    // http://stackoverflow.com/questions/13713726/maps-api-v2-with-different-marker-actions
+    // http://stackoverflow.com/questions/15333971/get-other-values-from-marker
+    private HashMap<String, String> markers= new HashMap<String, String>();
 
     private GoogleApiClient mGoogleApiClient;
 
@@ -108,10 +121,61 @@ public class MapFragment extends SupportMapFragment implements GoogleApiClient.C
 
         getMap().animateCamera( CameraUpdateFactory.newCameraPosition(position), null );
 
-        getMap().setMapType( MAP_TYPES[curMapTypeIndex] );
-        getMap().setTrafficEnabled( false );
-        getMap().setMyLocationEnabled( true );
-        getMap().getUiSettings().setZoomControlsEnabled( false );
+        getMap().setMapType(MAP_TYPES[curMapTypeIndex]);
+        getMap().setTrafficEnabled(false);
+        getMap().setMyLocationEnabled(true);
+        getMap().getUiSettings().setZoomControlsEnabled(false);
+        getMap().setOnMyLocationButtonClickListener(new GoogleMap.OnMyLocationButtonClickListener() {
+            @Override
+            public boolean onMyLocationButtonClick() {
+
+                ParseGeoPoint userLocation = new ParseGeoPoint(MapFragment.mCurrentLocation.getLatitude(),
+                        MapFragment.mCurrentLocation.getLongitude());
+                ParseQuery<ParseObject> query = ParseQuery.getQuery("BelleVue");
+                query.whereNear("location", userLocation);
+                query.setLimit(10);
+                query.findInBackground(new FindCallback<ParseObject>() {
+                    public void done(List<ParseObject> belleVueList, ParseException e) {
+                        if (e == null) {
+                            Log.d("score", "Retrieved " + belleVueList.size() + " scores");
+
+                            LatLng latLng;
+                            for (ParseObject belleVue : belleVueList) {
+                                /* Log.d("Categorie & ID", "Retrieved " + belleVue.get("name") + " categorie : " +
+                                        String.valueOf(belleVue.getInt("categorie")) + " ID : " + belleVue.getObjectId());*/
+                                latLng = new LatLng(((ParseGeoPoint) belleVue.get("location")).getLatitude(),
+                                        ((ParseGeoPoint) belleVue.get("location")).getLongitude());
+                                MarkerOptions options = new MarkerOptions().position(latLng);
+                                switch (belleVue.getInt("categorie")) {
+                                    case 1:
+                                        options.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW));
+                                        break;
+                                    case 2:
+                                        options.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
+                                        break;
+                                    case 3:
+                                        options.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
+                                        break;
+                                    case 4:
+                                        options.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET));
+                                        break;
+                                    default:
+                                        options.icon(BitmapDescriptorFactory.defaultMarker());
+                                        break;
+                                }
+                                // getMap().addMarker(options);
+                                markers.put(getMap().addMarker(options).getId(), belleVue.getObjectId());
+                            }
+                        } else {
+                            Log.d("score", "Error: " + e.getMessage());
+                        }
+                    }
+                });
+
+
+                return false;
+            }
+        });
     }
 
     @Override
@@ -132,7 +196,7 @@ public class MapFragment extends SupportMapFragment implements GoogleApiClient.C
     public void onConnected(Bundle bundle) {
         mCurrentLocation = LocationServices.FusedLocationApi.getLastLocation( mGoogleApiClient );
 
-        initCamera( mCurrentLocation );
+        initCamera(mCurrentLocation);
     }
 
     @Override
@@ -144,57 +208,55 @@ public class MapFragment extends SupportMapFragment implements GoogleApiClient.C
     public void onConnectionFailed(ConnectionResult connectionResult) {
         //Create a default location if the Google API Client fails. Placing location at Googleplex
         mCurrentLocation = new Location( "" );
-        mCurrentLocation.setLatitude( 48.8567 );
-        mCurrentLocation.setLongitude( 2.3508 );
+        mCurrentLocation.setLatitude(48.8567);
+        mCurrentLocation.setLongitude(2.3508);
         initCamera(mCurrentLocation);
     }
 
     @Override
     public void onInfoWindowClick(Marker marker) {
-        Toast.makeText( getActivity(), "Clicked on marker", Toast.LENGTH_SHORT ).show();
+        // Toast.makeText( getActivity(), "Clicked on marker", Toast.LENGTH_SHORT ).show();
     }
 
     @Override
     public boolean onMarkerClick(Marker marker) {
-        marker.showInfoWindow();
+        // marker.showInfoWindow();
+        // Toast.makeText( getActivity(), "Clicked on marker : " + markers.get(marker.getId()), Toast.LENGTH_SHORT ).show();
+        Intent vueView = new Intent(getActivity().getApplicationContext(), VueViewTabs.class);
+        vueView.putExtra("objectId", markers.get(marker.getId()));
+        startActivity(vueView);
         return true;
     }
 
     @Override
-    public void onMapClick(LatLng latLng) {
-
-        MarkerOptions options = new MarkerOptions().position( latLng );
-        options.title( getAddressFromLatLng( latLng ) );
-
-        options.icon( BitmapDescriptorFactory.defaultMarker() );
-        getMap().addMarker( options );
-    }
-
-    @Override
     public void onMapLongClick(LatLng latLng) {
-        MarkerOptions options = new MarkerOptions().position( latLng );
+        /*MarkerOptions options = new MarkerOptions().position( latLng );
         options.title( getAddressFromLatLng(latLng) );
 
         options.icon( BitmapDescriptorFactory.fromBitmap(
                 BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher)) );
 
-        getMap().addMarker(options);
+        getMap().addMarker(options);*/
     }
 
-    private String getAddressFromLatLng( LatLng latLng ) {
-        Geocoder geocoder = new Geocoder( getActivity() );
+    @Override
+    public void onMapClick(LatLng latLng) {
+        /*
+        //**** just for now
+        getMap().setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
 
-        String address = "";
-        try {
-            address = geocoder.getFromLocation( latLng.latitude, latLng.longitude, 1 ).get( 0 ).getAddressLine( 0 );
-        } catch (IOException e ) {
-        }
+            @Override
+              public boolean onMarkerClick(Marker m) {
+                Intent vueView = new Intent(getActivity().getApplicationContext(), VueViewTabs.class);
+                startActivity(vueView);
+                // vueView.putExtra("user_name","WQFIDPyMIg");
 
-        return address;
-    }
+                return true;
+            }
 
-    private void toggleTraffic() {
-        getMap().setTrafficEnabled( !getMap().isTrafficEnabled() );
+         });
+        //**** just for now
+        */
     }
 
     private void cycleMapType() {
