@@ -170,8 +170,8 @@ public class VueViewTabs extends AppCompatActivity {
                                     }
 
                                     Uri test;
-                                    File photo = new File(Tool.root_path,
-                                            "tmp_pic" + String.valueOf(cptr) + ".jpg");
+                                    File photo = File.createTempFile("pic_", null, root);
+                                            // new File(Tool.root_path, "tmp_pic" + String.valueOf(cptr) + ".jpg");
                                     test = Uri.fromFile(photo);
                                     Files.write(data, photo);
                                     Log.d("currentPicture", String.valueOf(cptr));

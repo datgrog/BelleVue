@@ -38,13 +38,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AddVue extends AppCompatActivity {
-    static int MAX_PIC  = 6;
-    static int TAKE_PIC = 1;
+    final int MAX_PIC  = 6;
+    final int TAKE_PIC = 1;
     Uri outPutfileUri;
     int nbPicture = 0;
     List<File> files = new ArrayList<>();
 
-    static  SliderLayout sliderShow;
+    private SliderLayout sliderShow;
     private FloatingActionButton addPhoto;
     RadioButton m_one, m_two, m_three, m_four;
     android.support.design.widget.TextInputLayout t1,t2;
@@ -67,6 +67,7 @@ public class AddVue extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Tool.reset_bellevue_dir(root);
                 finish();
             }
         });
@@ -80,16 +81,12 @@ public class AddVue extends AppCompatActivity {
         sliderShow = (SliderLayout) findViewById(R.id.slider);
 
         if (nbPicture == 0) {
-            /* In case you add another Vue slider need to be reset */
-            sliderShow.removeAllSliders();
-
             TextSliderView picture1 = new TextSliderView(this);
             picture1
                     .description("Take some pictures !")
                     .image("https://tedconfblog.files.wordpress.com/2014/12/8photography_tips.png");
             sliderShow.addSlider(picture1);
             sliderShow.stopAutoCycle();
-            Tool.reset_bellevue_dir(root);
         }
 
         /* Take Picture */
@@ -106,10 +103,12 @@ public class AddVue extends AppCompatActivity {
 
         /* Bubble help */
         final TextView categorie_info = (TextView) findViewById(R.id.info);
+        /*
         Drawable[] bubble = categorie_info.getCompoundDrawables();
         if (bubble[0] != null) {
             bubble[0].setColorFilter(flat_blu_app, PorterDuff.Mode.MULTIPLY);
         }
+        */
 
         /* ImageView Color */
         ImageView cat1 = (ImageView) findViewById(R.id.water_point);
@@ -245,7 +244,6 @@ public class AddVue extends AppCompatActivity {
 
     private void saveVue(String name, String description, int categorie, List<File> files) {
 
-        // ArrayList<ParseFile> pictureList = new ArrayList<>();
         int cptrPicture = 0;
         byte[] pictureTmp;
 
@@ -268,7 +266,7 @@ public class AddVue extends AppCompatActivity {
 
         // Create the Pictures
         ParseObject pictures = new ParseObject("Pictures");
-
+        pictures.setACL(acl);
         // nbPicture incr at each photo taken <=> nbPhoto
         pictures.put("nbPicture", nbPicture);
 
@@ -284,16 +282,15 @@ public class AddVue extends AppCompatActivity {
         }
 
         // Add a relation between the BelleVue and Pictures
-        pictures.put("parent", newVue);
+        // pictures.put("parent", newVue);
 
         // This will save both BelleVue and Pictures
-        pictures.saveInBackground();
+        newVue.saveInBackground();
         nbPicture = 0;
         finish();
     }
 
     private void takePhoto() {
-
         addPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -308,13 +305,16 @@ public class AddVue extends AppCompatActivity {
 
                 if (MAX_PIC != nbPicture) {
                     Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                    File photo = new File(Tool.root_path,
-                            "tmp_pic" + String.valueOf(nbPicture) + ".jpg");
-                    outPutfileUri = Uri.fromFile(photo);
-                    files.add(photo);
-                    Log.d("var file[" + String.valueOf(nbPicture) + "] : ", Uri.fromFile(files.get(nbPicture)).toString());
-                    intent.putExtra(MediaStore.EXTRA_OUTPUT, outPutfileUri);
-                    startActivityForResult(intent, TAKE_PIC);
+                    try {
+                        File photo = File.createTempFile("pic_", null, root);
+                        outPutfileUri = Uri.fromFile(photo);
+                        files.add(photo);
+                        Log.d("var file[" + String.valueOf(nbPicture) + "] : ", Uri.fromFile(files.get(nbPicture)).toString());
+                        intent.putExtra(MediaStore.EXTRA_OUTPUT, outPutfileUri);
+                        startActivityForResult(intent, TAKE_PIC);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 } else {
                     Toast.makeText(getBaseContext(), "You already take 6 pictures, that's enough ;)", Toast.LENGTH_SHORT).show();
                 }
@@ -329,7 +329,7 @@ public class AddVue extends AppCompatActivity {
             if (nbPicture == 0) sliderShow.removeAllSliders();
             TextSliderView pic_test = new TextSliderView(this);
             pic_test
-                    .description("C'est bon sa")
+                    .description("C'est bon ça")
                     .image(outPutfileUri.toString());
             sliderShow.addSlider(pic_test);
             nbPicture++;
@@ -338,8 +338,6 @@ public class AddVue extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        sliderShow.stopAutoCycle();
-        /* Check BelleVue directory */
         Tool.reset_bellevue_dir(root);
         super.onBackPressed();
     }

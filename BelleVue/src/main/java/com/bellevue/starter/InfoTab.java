@@ -19,7 +19,7 @@ import java.util.ArrayList;
  */
 public class InfoTab extends Fragment {
 
-    static private SliderLayout sliderShow;
+    private SliderLayout sliderShow;
 
     private static final String ARG_PARAM1 = "vueName";
     private static final String ARG_PARAM2 = "vueDescription";
@@ -29,7 +29,6 @@ public class InfoTab extends Fragment {
     private String vueDescription;
     private int    vueRate;
     private int    nbPicture;
-    private ArrayList<String>    uriPicture;
 
     public static InfoTab newInstance(String vueName, String vueDescription, int vueRate) {
         InfoTab fragment = new InfoTab();
@@ -78,6 +77,7 @@ public class InfoTab extends Fragment {
         RatingBar rtStar         = (RatingBar) myView.findViewById(R.id.ratingBar);
         sliderShow = (SliderLayout) myView.findViewById(R.id.slider);
         sliderShow.stopAutoCycle();
+        sliderShow.removeAllSliders();
 
         tvName.setText(vueName);
         tvDescription.setText(vueDescription);
@@ -88,7 +88,6 @@ public class InfoTab extends Fragment {
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        sliderShow.removeAllSliders();
 /*
         TextSliderView pic_test;
         pic_test = new TextSliderView(getActivity());
