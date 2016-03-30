@@ -3,7 +3,6 @@ package com.bellevue.starter;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
-import android.graphics.PorterDuff;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -243,7 +242,6 @@ public class AddVue extends AppCompatActivity {
     }
 
     private void saveVue(String name, String description, int categorie, List<File> files) {
-
         int cptrPicture = 0;
         byte[] pictureTmp;
 
@@ -257,12 +255,12 @@ public class AddVue extends AppCompatActivity {
 
         // Create the BelleVue
         ParseObject newVue = new ParseObject("BelleVue");
+        newVue.setACL(acl);
         newVue.put("name", name);
         newVue.put("description", description);
         newVue.put("categorie", categorie);
         newVue.put("star", 5.0);
         newVue.put("location", point);
-        newVue.setACL(acl);
 
         // Create the Pictures
         ParseObject pictures = new ParseObject("Pictures");
@@ -282,7 +280,7 @@ public class AddVue extends AppCompatActivity {
         }
 
         // Add a relation between the BelleVue and Pictures
-        // pictures.put("parent", newVue);
+        newVue.put("Pictures", pictures);
 
         // This will save both BelleVue and Pictures
         newVue.saveInBackground();
